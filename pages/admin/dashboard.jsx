@@ -1,8 +1,8 @@
-import { Container, HStack, Input } from '@chakra-ui/react'
 import React from 'react'
-import { Button} from '@chakra-ui/react'
-import { isAdmin } from '../../data/usuarios'
 import { useRouter } from 'next/router'
+import {  Button, Container, HStack, Input } from '@chakra-ui/react'
+import { isAdmin } from '../../data/usuarios'
+
 
 const adminDashboard = () => {
 
@@ -31,9 +31,12 @@ const adminDashboard = () => {
         <HStack>
             <Button onClick={onSubmit}>Enviar mensajes</Button>
             <Button onClick={() => router.push('./turnos')}>Crear Turnos</Button>
+            <Button colorScheme={"teal"} onClick={() => router.push('../usuarios/crear')} >Crear usuario</Button> 
+            <Button colorScheme={"teal"} onClick={() => router.push('../usuarios/mostrar')}>Ver empleados</Button>
         </HStack>
         </Container>
     )
 }
+
 
 export default adminDashboard

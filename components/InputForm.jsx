@@ -2,7 +2,7 @@ import React from 'react'
 import { Input, FormControl, FormLabel } from '@chakra-ui/react'
 
 const InputForm = ({ label, handleChange, name, placeholder, type, value, handleBlur }) => {
-    console.log("name: ", name, "values: ", value)
+    //console.log("name: ", name, "values: ", value)
     return (
         <FormControl id={name}>
             <FormLabel>{label}</FormLabel>
