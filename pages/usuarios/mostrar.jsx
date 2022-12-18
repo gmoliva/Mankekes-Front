@@ -79,7 +79,7 @@ const Mostrar = () => {
         <> 
             <Container maxW="container.xl">
                 <Heading as="h1" size="2xl" textAlign="center" mt="10">Seleccione un conserje</Heading>
-                <Button variant='outline' spacing='1000' onClick={()=> router.push('../dashboard')}>Atras</Button>
+                <Button variant='outline' spacing='1000' onClick={()=> router.push('../admin/dashboard')}>Atras</Button>
                 <Stack spacing={4} mt="10">
                     <Table variant="simple">     
                         <Thead>

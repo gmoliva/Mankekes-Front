@@ -37,7 +37,7 @@ const usuarios = () => {
             confirmButtonText: 'OK'
         }).then((result) => {
             if (result.isConfirmed) {
-            router.push('../dashboard')
+            router.push('../admin/dashboard')
             }
         })
     }
@@ -45,7 +45,7 @@ const usuarios = () => {
     return (
         <Container maxW="container.xl" mt={10}>
             <Heading as={"h1"} size={"2xl"} textAlign={"center"}>Crear Usuario</Heading>
-            <Button variant='outline' spacing='1000' onClick={()=> router.push('../dashboard')}>Atras</Button>
+            <Button variant='outline' spacing='1000' onClick={()=> router.push('../admin/dashboard')}>Atras</Button>
             <Stack spacing={4} mt={10}>
                 <FormControl id="rut"> 
                     <FormLabel>RUT</FormLabel>
@@ -91,7 +91,7 @@ const usuarios = () => {
                 </Stack>
             <HStack>
                 <Button colorScheme="blue" mt={10} mb={10} onClick={submitProduct}>Crear</Button>
-                <Button colorScheme="red" mt={10} mb={10} onClick={() => router.push('../dashboard')}>Cancelar</Button>
+                <Button colorScheme="red" mt={10} mb={10} onClick={() => router.push('../admin/dashboard')}>Cancelar</Button>
             </HStack>
         </Container>
     )
