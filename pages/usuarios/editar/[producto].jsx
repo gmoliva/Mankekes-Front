@@ -1,6 +1,5 @@
 import {useState} from 'react'
 import {useRouter} from 'next/router'
-import Router from 'next/router'
 import TextareaInput from '../../../components/TextareaInput'
 import Swal from 'sweetalert2'
 import { Button, Container, Heading, HStack, Stack,Select, FormControl, FormLabel,Input} from '@chakra-ui/react'
