@@ -18,11 +18,12 @@ const Index = () => {
 		e.preventDefault()
 		const response = await login(rut)
 		if (response.status === 200) {
-			localStorage.setItem('token', rut)
+			//localStorage.setItem('token', rut)
 			//localStorage.setItem('userType', response.data.user)
 			
 			const usrType = await isAdmin(rut)
-
+			
+			localStorage.setItem('token', usrType.data.userId)
 			//console.log(response.data.user)
 			if(usrType.status === 202){
 				router.push('./admin/dashboard')

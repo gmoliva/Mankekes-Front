@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Button, Container, Heading, HStack, Input, Stack, Table, Thead, Tr, Td, Th, Tbody } from '@chakra-ui/react'
-import { getTurnos } from '../../data/turnos'
+import { getTurnos, getTurnosFrom } from '../../data/turnos'
 import { useRouter } from 'next/router'
 
 const Turnos = () => {
@@ -32,7 +32,7 @@ const Turnos = () => {
     }
 
     useEffect(() => {
-        getTurnos().then(res => {
+        getTurnosFrom().then(res => {
             setTurnos(res.data)
         })
     }, [])

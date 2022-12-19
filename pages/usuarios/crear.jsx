@@ -1,8 +1,10 @@
 import { useState } from 'react'
-import { Button, Container, Heading, HStack, Stack,Select, FormControl, FormLabel,Input} from '@chakra-ui/react'
+import { Button, Container, Heading, HStack, Stack,Select, FormControl, FormLabel,Input, FormHelperText, FormErrorMessage} from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import {createUsuario} from '../../data/usuarios'
 import  Swal  from 'sweetalert2'
+
+import {  validate, clean, format, getCheckDigit } from 'rut.js'
 
 const usuarios = () => {
 
@@ -27,6 +29,15 @@ const usuarios = () => {
 
     const submitProduct = (e) => {
         e.preventDefault()
+
+        /*
+        if(!validate(Usuario.rut))
+        return Swal.fire({
+            title: 'Rut invalido',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK'
+        })
+        */
         createUsuario(Usuario).then(res => {
             //console.log(res.data.name)
         })
@@ -47,9 +58,16 @@ const usuarios = () => {
             <Heading as={"h1"} size={"2xl"} textAlign={"center"}>Crear Usuario</Heading>
             <Button variant='outline' spacing='1000' onClick={()=> router.push('../admin/dashboard')}>Atras</Button>
             <Stack spacing={4} mt={10}>
-                <FormControl id="rut"> 
+                <FormControl id="rut" isRequired> 
                     <FormLabel>RUT</FormLabel>
-                    <Input name="rut" placeholder="01.234.567-8" type="text" onChange = {handleChange}/>
+                    <Input name="rut" placeholder="12.345.678-9" type="text" onChange = {handleChange}/>
+                    {!validate(Usuario.rut) ? (
+                        <FormHelperText>
+                            Rut Invalido
+                        </FormHelperText>
+                    ) : (
+                        <FormErrorMessage>Email is required.</FormErrorMessage>
+                    )}
                 </FormControl> 
 
                 <FormControl id="nombre"> 

@@ -29,10 +29,10 @@ const adminDashboard = () => {
             <h1>This is the admin landing page</h1>
         </div>
         <HStack>
-            <Button onClick={onSubmit}>Enviar mensajes</Button>
-            <Button onClick={() => router.push('./turnos')}>Crear Turnos</Button>
+            <Button colorScheme={"teal"} onClick={onSubmit}>Enviar mensajes</Button>
             <Button colorScheme={"teal"} onClick={() => router.push('../usuarios/crear')} >Crear usuario</Button> 
             <Button colorScheme={"teal"} onClick={() => router.push('../usuarios/mostrar')}>Ver empleados</Button>
+            <Button colorScheme={"teal"} onClick={() => router.push('../turnos/administracionTurnos')}>Administrar turnos</Button>
         </HStack>
         </Container>
     )

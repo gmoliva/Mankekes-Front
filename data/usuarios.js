@@ -19,8 +19,8 @@ const getConserjes = async () => {
     
 }
 
-const isAdmin = async () => {
-    let rut = localStorage.getItem("token")
+const isAdmin = async (rut) => {
+    //let rut = localStorage.getItem("token")
     const response = await axios.get(`http://localhost:5000/api/Usuario/query/${rut}`)
     return response
 }
