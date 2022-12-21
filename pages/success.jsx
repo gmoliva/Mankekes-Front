@@ -83,7 +83,7 @@ return (
             
             <Container borderWidth="4px" borderStyle="dashed" rounded="md" h="930" >
         <div>
-            <h1>This is the admin landing page</h1>
+            <h1 className="text-3xl font-bold underline">This is the admin landing page</h1>
         </div>
         <HStack>
             <Button colorScheme={"teal"} onClick={() => {}}>Enviar mensajes</Button>
