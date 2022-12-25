@@ -18,19 +18,58 @@ const usuarios = () => {
 
     const router = useRouter()
 
+    function validar(){
+
+        var rut,nombre,domicilio,email,numero,tipoUsuario,estadoUsuario;
+    
+        rut = document.getElementById("rut").value;
+        nombre = document.getElementById("nombre").value;
+        domicilio = document.getElementById("domicilio").value;
+        email = document.getElementById("email").value;
+        numero = document.getElementById("numero").value;
+        tipoUsuario = document.getElementById("tipoUsuario").value;
+        estadoUsuario = document.getElementById("estadoUsuario").value;
+        
+        //expresionMail = /\w+@\w+\.+[a-zA-Z]/;
+        const expresionRut ="";
+        const expresionNombre = /^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/;
+        const expresionDomicilio =/[a-zA-Z]+\s[A-Za-z0-9]+/;
+        const expresionEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
+
+        if(rut === "" || nombre === "" || domicilio === "" || email === "" || numero === "" || tipoUsuario === "" || estadoUsuario === ""){
+            return false;
+        }else if(!expresionNombre.test(nombre)){
+            alert("El nombre no es valido")
+            return false;
+        }else if(!expresionEmail.test(email)){
+            alert("El email no es valido")
+            return false;
+        }else if(!expresionDomicilio.test(domicilio)){
+            alert("El domicilio no valido")
+            return false;
+        }
+        return true; 
+    }
+
     const handleChange = (e) => {
         setProduct({
             ...Usuario,
             [e.target.name]: e.target.value
         })  
+
     }
 
     const submitProduct = (e) => {
-        e.preventDefault()
+
+        const v = validar();
+
+        if (v === false){
+            alert("Todos los campos son obligatorios");
+        }else if (v === true){
+            e.preventDefault()
         createUsuario(Usuario).then(res => {
             //console.log(res.data.name)
         })
-
         Swal.fire({
             title: 'Se creo un nuevo usuario',
             confirmButtonColor: '#3085d6',
@@ -39,8 +78,11 @@ const usuarios = () => {
             if (result.isConfirmed) {
             router.push('../admin/dashboard')
             }
-        })
+        })    
+        }
+        
     }
+
 
     return (
         <Container maxW="container.xl" mt={10}>
@@ -54,7 +96,7 @@ const usuarios = () => {
 
                 <FormControl id="nombre"> 
                     <FormLabel>Nombre</FormLabel>
-                    <Input name={"nombre"} placeholder="Norman Vergara" type="text" onChange = {handleChange}/>
+                    <Input pattern="[a-zA-Z]+" name={"nombre"} placeholder="Norman Vergara" type="text" onChange = {handleChange}/>
                 </FormControl> 
 
                 <FormControl id="domicilio"> 
@@ -64,7 +106,7 @@ const usuarios = () => {
 
                 <FormControl id="email"> 
                     <FormLabel>Email</FormLabel>
-                    <Input name={"email"} placeholder="mail@gmail.com" type="text" onChange = {handleChange}/>
+                    <Input name={"email"} placeholder="mail@gmail.com" type="email" onChange = {handleChange}/>
                 </FormControl> 
 
                 <FormControl id="numero"> 

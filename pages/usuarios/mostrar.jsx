@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
-import { Button, Container, Heading, HStack, Input, Stack, Table, Thead, Tr, Td, Th, Tbody } from '@chakra-ui/react'
+import { Button, Container, Heading, HStack, Stack, Table, Thead, Tr, Td, Tbody } from '@chakra-ui/react'
 import { getUsuarios,deleteUsuario  } from '../../data/usuarios'
 import { useRouter } from 'next/router'
 import  Swal  from 'sweetalert2'
-
 
 const Mostrar = () => {
     const [conserjes, setConserjes] = useState([{
@@ -48,11 +47,12 @@ const Mostrar = () => {
             }
         )
     }
-    
+
     const contentTable = () => {
-        return conserjes.map(conserje => {
-            return (
-                <Tr key={conserje._id}>
+        
+        return conserjes.map((conserje,index) => {
+            return (               
+                <Tr key={index}>
                     <Td>{conserje.nombre}</Td>
                     <Td>{conserje.rut}</Td>
                     <Td>{conserje.email}</Td>
@@ -64,6 +64,7 @@ const Mostrar = () => {
                         </HStack>
                     </Td>
                 </Tr>
+                
             )
         })
     }
@@ -73,7 +74,6 @@ const Mostrar = () => {
             setConserjes(res.data)
         })
     }, [])
-
 
     return (
         <> 

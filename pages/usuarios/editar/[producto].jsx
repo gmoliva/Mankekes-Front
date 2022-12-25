@@ -2,7 +2,7 @@ import {useState} from 'react'
 import {useRouter} from 'next/router'
 import TextareaInput from '../../../components/TextareaInput'
 import Swal from 'sweetalert2'
-import { Button, Container, Heading, HStack, Stack,Select, FormControl, FormLabel,Input} from '@chakra-ui/react'
+import { Button, Container, Heading,Stack,Select, FormControl} from '@chakra-ui/react'
 import { getUsuario,updateUsuario} from '../../../data/usuarios'
 
 export const getServerSideProps = async (context) => {
@@ -58,10 +58,8 @@ const editar = ({ data }) => {
     const delay = ms => new Promise(
         resolve => setTimeout(resolve, ms)
     );
-
     
-        return(
-        
+        return(   
             <Container maxW="container.xl" mt={10}>
             <Heading as={"h1"} size={"2xl"} textAlign={"center"}>Modificar Usuario: {data.nombre}</Heading>
             <Stack spacing={4} mt={10}>
@@ -93,20 +91,3 @@ const editar = ({ data }) => {
 }
 
 export default editar
-
-/*return(
-    <div>
-    {data.nombre}
-    </div> 
-    )
-
-    rut:'',
-        nombre:'',
-        domicilio:'',
-        email:'',
-        numero:'',
-        tipoUsuario:'',
-        estadoUsuario:''
-
-*/
-
