@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Button, Container, Heading, HStack, Input, Stack, Table, Thead, Tr, Td, Th, Tbody, FormControl, FormLabel } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { login } from '../data/usuarios'
-import { isAdmin } from '../data/usuarios'
-
+import { login,isAdmin } from '../data/usuarios'
 const Index = () => {
 
 	const [rut, setRUT] = useState('')

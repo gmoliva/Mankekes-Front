@@ -24,10 +24,10 @@ const justificar = () => {
                 [e.target.name]: e.target.value
             })
     }
-    console.log(novedad)
+   
     const submitNovedades =(e) => {
         e.preventDefault()
-        enviarJustificacion(novedad)
+        enviarJustificacion(novedad.idUsuario,novedad)
         handleClick()
 
     }

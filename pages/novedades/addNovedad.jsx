@@ -13,7 +13,7 @@ const addNovedad = () => {
 
     const [novedad, setNovedades] = useState({
         asunto: '',
-        descripcion: ''
+        descripcion: '',
         //idTurno: '',
         //idUsuario: ''
     })
