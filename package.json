@@ -12,14 +12,20 @@
     "@chakra-ui/react": "^2.4.2",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
-    "@sweetalert2/theme-dark": "^5.0.15",
     "axios": "^1.2.0",
     "eslint": "8.29.0",
     "eslint-config-next": "13.0.6",
+    "formik": "^2.2.9",
     "framer-motion": "^7.6.18",
+    "moment": "^2.29.4",
     "next": "13.0.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "sweetalert2": "^11.4.8"
+    "sweetalert2": "^11.6.15",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.5",
+    "@babel/preset-env": "^7.20.2"
   }
 }

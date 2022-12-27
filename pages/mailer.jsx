@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 import { Button, Container, Heading, HStack, Input, Stack, Table, Thead, Tr, Td, Th, Tbody } from '@chakra-ui/react'
-import { getUsuarios } from '../data/usuarios'
+import { getConserjes } from '../data/conserjes'
 import { useRouter } from 'next/router'
 
 const Mailer = () => {
 
-    const [usuarios, setUsuarios] = useState([{
+    const [conserjes, setConserjes] = useState([{
         id: '',
         rut: '',
         nombre: '',
@@ -16,16 +16,16 @@ const Mailer = () => {
     const router = useRouter()
 
     const contentTable = () => {
-        return usuarios.map(usuario => {
+        return conserjes.map(conserje => {
             return (
-                <Tr key={usuario._id}>
-                    <Td>{usuario.nombre}</Td>
-                    <Td>{usuario.rut}</Td>
-                    <Td>{usuario.email}</Td>
+                <Tr key={conserje._id}>
+                    <Td>{conserje.nombre}</Td>
+                    <Td>{conserje.rut}</Td>
+                    <Td>{conserje.email}</Td>
                     <Td>
                         <HStack>
                             <Button colorScheme={"orange"} onClick={() => router.push(`./success`)}>Ver</Button>
-                            <Button colorScheme={"teal"} onClick={() => router.push(`./mailer/send/${usuario._id}`)}>Enviar mensaje</Button>
+                            <Button colorScheme={"teal"} onClick={() => router.push(`./mailer/send/${conserje._id}`)}>Enviar mensaje</Button>
                         </HStack>
                     </Td>
                 </Tr>
@@ -34,8 +34,8 @@ const Mailer = () => {
     }
 
     useEffect(() => {
-        getUsuarios().then(res => {
-            setUsuarios(res.data)
+        getConserjes().then(res => {
+            setConserjes(res.data)
         })
     }, [])
 
@@ -43,7 +43,7 @@ const Mailer = () => {
     return (
         <>
             <Container maxW="container.xl">
-                <Heading as="h1" size="2xl" textAlign="center" mt="10">Seleccione un usuario</Heading>
+                <Heading as="h1" size="2xl" textAlign="center" mt="10">Seleccione un conserje</Heading>
                 <Button colorScheme="blue" mt="10" mb="10" onClick={() => router.push('/product/crear')}>Agregar producto</Button>
                 <Stack spacing={4} mt="10">
                     <Table variant="simple">

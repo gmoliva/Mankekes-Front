@@ -2,12 +2,12 @@ import { Container, Input } from '@chakra-ui/react'
 import React from 'react'
 
 
-const conserjeDb = () => {
+const adminDashboard = () => {
     return (
         <div>
-            <h1>This is the conserje landing page</h1>
+            <h1>This is the admin landing page</h1>
         </div>
     )
 }
 
-export default conserjeDb
+export default adminDashboard
