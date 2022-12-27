@@ -50,7 +50,8 @@ const handleCancel = () =>{
 }
 
 return(
-    <Box display="flex" justifyContent="center" alignItems="center" h="2xl">
+    // arreglar  el center 
+  <Box class="flex-1 items-center justify-center w-1.5">
     <form onSubmit={handleSubmit}>
         <Stack isInline={false}>
         <FormControl>
