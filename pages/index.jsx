@@ -1,10 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Button, Container, Heading, HStack, Input, Stack, Table, Thead, Tr, Td, Th, Tbody, FormControl, FormLabel } from '@chakra-ui/react'
-//import { getProducts } from '../data/products'
 import { useRouter } from 'next/router'
-import { login } from '../data/usuarios'
-import { isAdmin } from '../data/usuarios'
-
+import { login,isAdmin } from '../data/usuarios'
 const Index = () => {
 
 	const [rut, setRUT] = useState('')
@@ -18,11 +15,11 @@ const Index = () => {
 		e.preventDefault()
 		const response = await login(rut)
 		if (response.status === 200) {
-			localStorage.setItem('token', rut)
-			//localStorage.setItem('userType', response.data.user)
+			//localStorage.setItem('token', rut)
 			
 			const usrType = await isAdmin(rut)
-
+			
+			localStorage.setItem('token', usrType.data.userId)
 			//console.log(response.data.user)
 			if(usrType.status === 202){
 				router.push('./admin/dashboard')

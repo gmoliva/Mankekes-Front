@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { Button, Container, Heading, HStack, Stack,Select, FormControl, FormLabel,Input} from '@chakra-ui/react'
+import { Button, Container, Heading, HStack, Stack,Select, FormControl, FormLabel, FormHelperText,Input, FormErrorMessage} from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import {createUsuario} from '../../data/usuarios'
 import  Swal  from 'sweetalert2'
+import {  validate, clean, format, getCheckDigit } from 'rut.js'
 
 const usuarios = () => {
 
@@ -29,14 +30,15 @@ const usuarios = () => {
         numero = document.getElementById("numero").value;
         tipoUsuario = document.getElementById("tipoUsuario").value;
         estadoUsuario = document.getElementById("estadoUsuario").value;
-        
-        //expresionMail = /\w+@\w+\.+[a-zA-Z]/;
-        const expresionRut ="";
+
         const expresionNombre = /^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/;
         const expresionDomicilio =/[a-zA-Z]+\s[A-Za-z0-9]+/;
         const expresionEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
 
         if(rut === "" || nombre === "" || domicilio === "" || email === "" || numero === "" || tipoUsuario === "" || estadoUsuario === ""){
+            return false;
+        }else if(!validate(rut)){
+            alert("El rut no es valido")
             return false;
         }else if(!expresionNombre.test(nombre)){
             alert("El nombre no es valido")
@@ -70,6 +72,7 @@ const usuarios = () => {
         createUsuario(Usuario).then(res => {
             //console.log(res.data.name)
         })
+        
         Swal.fire({
             title: 'Se creo un nuevo usuario',
             confirmButtonColor: '#3085d6',
@@ -89,9 +92,16 @@ const usuarios = () => {
             <Heading as={"h1"} size={"2xl"} textAlign={"center"}>Crear Usuario</Heading>
             <Button variant='outline' spacing='1000' onClick={()=> router.push('../admin/dashboard')}>Atras</Button>
             <Stack spacing={4} mt={10}>
-                <FormControl id="rut"> 
+                <FormControl id="rut" isRequired> 
                     <FormLabel>RUT</FormLabel>
-                    <Input name="rut" placeholder="01.234.567-8" type="text" onChange = {handleChange}/>
+                    <Input name="rut" placeholder="12.345.678-9" type="text" onChange = {handleChange}/>
+                    {!validate(Usuario.rut) ? (
+                        <FormHelperText>
+                            Rut Invalido
+                        </FormHelperText>
+                    ) : (
+                        <FormErrorMessage>Email is required.</FormErrorMessage>
+                    )}
                 </FormControl> 
 
                 <FormControl id="nombre"> 
