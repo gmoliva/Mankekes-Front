@@ -30,7 +30,7 @@ const adminDashboard = () => {
         </div>
         <HStack>
             <Button onClick={onSubmit}>Enviar mensajes</Button>
-            <Button onClick={() => router.push('./turnos')}>Crear Turnos</Button>
+            <Button onClick={() => router.push('../turnos/administracionTurnos')}>Crear Turnos</Button>
             <Button colorScheme={"teal"} onClick={() => router.push('../usuarios/crear')} >Crear usuario</Button> 
             <Button colorScheme={"teal"} onClick={() => router.push('../usuarios/mostrar')}>Ver empleados</Button>
         </HStack>

@@ -26,8 +26,8 @@ const deleteNovedad = async (id) =>{
     const response = await axios.delete(`${process.env.SERVIDOR}/novedad/${id}`)
     return response
 }
-const enviarJustificacion = (novedad) => {
-    const response = axios.post(`${process.env.SERVIDOR}/justificar/${id}`, justificacion)
+const enviarJustificacion = async (id,justificacion) => {
+    const response = await axios.post(`${process.env.SERVIDOR}/novedad/justificar/${id}`, justificacion)
     return response
 }
 
