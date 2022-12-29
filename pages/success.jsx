@@ -83,17 +83,13 @@ return (
             
             <Container borderWidth="4px" borderStyle="dashed" rounded="md" h="930" >
         <div>
-            <h1 className="text-3xl font-bold underline">This is the admin landing page</h1>
+            <h1>Buenas Conserje, que desea hacer hoy</h1>
+                <Button colorScheme={"red"} onClick={() => router.push('./novedades/novedad')}>Novedades turno</Button>
+                <Button colorScheme={"blue"} onClick={() => router.push('./novedades/justificar')}>Justificacion</Button>
+                <Button colorScheme={"teal"} onClick={() => router.push('./turnos/conserjeriaTurnos')}>Ver mis turnos</Button>
+
         </div>
-        <HStack>
-            <Button colorScheme={"teal"} onClick={() => {}}>Enviar mensajes</Button>
-            <Button colorScheme={"teal"} onClick={() => router.push('../usuarios/crear')} >Crear usuario</Button> 
-            <Button colorScheme={"teal"} onClick={() => router.push('../usuarios/mostrar')}>Ver empleados</Button>
-            <Button colorScheme={"teal"} onClick={() => router.push('../turnos/administracionTurnos')}>Administrar turnos</Button>
-        </HStack>
-        </Container>
-        </Box>
-    </Box>
-</Box>
-);
-};
+    )
+}
+
+export default conserjeDb

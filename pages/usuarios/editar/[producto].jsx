@@ -1,8 +1,9 @@
 import {useState} from 'react'
 import {useRouter} from 'next/router'
 import TextareaInput from '../../../components/TextareaInput'
+import InputForm from '../../../components/InputForm'
 import Swal from 'sweetalert2'
-import { Button, Container, Heading, HStack, Stack,Select, FormControl, FormLabel,Input} from '@chakra-ui/react'
+import { Button, Container, Heading,Stack,Select, FormControl} from '@chakra-ui/react'
 import { getUsuario,updateUsuario} from '../../../data/usuarios'
 
 export const getServerSideProps = async (context) => {
@@ -20,18 +21,59 @@ const editar = ({ data }) => {
     const router = useRouter()
     const { producto } = router.query
 
+    function validar(){
+
+        var rut,nombre,domicilio,email,numero,tipoUsuario,estadoUsuario;
+    
+        rut = usuario.rut;
+        nombre = usuario.nombre;
+        domicilio = usuario.domicilio;
+        email = usuario.email;
+        numero = usuario.numero;
+        tipoUsuario = usuario.tipoUsuario;
+        estadoUsuario = usuario.estadoUsuario;
+
+        const expresionNombre = /^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/;
+        const expresionDomicilio =/[a-zA-Z]+\s[A-Za-z0-9]+/;
+        const expresionEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
+
+        if(rut === "" || nombre === "" || domicilio === "" || email === "" || numero === "" || tipoUsuario === "" || estadoUsuario === ""){
+            return false;
+        }else if(!expresionNombre.test(nombre)){
+            alert("El nombre no es valido")
+            return false;
+        }else if(!expresionEmail.test(email)){
+            alert("El email no es valido")
+            return false;
+        }else if(!expresionDomicilio.test(domicilio)){
+            alert("El domicilio no valido")
+            return false;
+        }
+        return true; 
+    }
+
     const handleChange = (e) => {
         setUsuario({
             ...usuario,
             [e.target.name]: e.target.value
         })
+
     }
 
-
+    //console.log(usuario.rut)
     const submitUsuario =(e) => {
         e.preventDefault()
 
-        let timerInterval
+        const v = validar();
+
+        if (v === false){
+            //alert("Por favor ingresar de manera correcta los");
+            console.log("mal")
+        }else if (v === true){
+            //e.preventDefault()
+            console.log("bien")
+
+            let timerInterval
         updateUsuario(producto,usuario).then(res => {
             if (res.status == 200){
                 Swal.fire({
@@ -48,6 +90,7 @@ const editar = ({ data }) => {
                 handleClick()
             }
         })
+        }   
     }
 
     const handleClick = async event => {
@@ -58,18 +101,16 @@ const editar = ({ data }) => {
     const delay = ms => new Promise(
         resolve => setTimeout(resolve, ms)
     );
-
     
-        return(
-        
+        return(   
             <Container maxW="container.xl" mt={10}>
             <Heading as={"h1"} size={"2xl"} textAlign={"center"}>Modificar Usuario: {data.nombre}</Heading>
             <Stack spacing={4} mt={10}>
-                <TextareaInput label="Rut" handleChange={handleChange} name="rut" placeholder="Actualizar rut" type="text" value={usuario.rut}/>
-                <TextareaInput label="Nombre" handleChange={handleChange} name="nombre" placeholder="Actualizar nombre" type="text" value={usuario.nombre}/>
-                <TextareaInput label="Domicilio" handleChange={handleChange} name="domicilio" placeholder="Actualizar domicilio" type="text" value={usuario.domicilio}/>
-                <TextareaInput label="Email" handleChange={handleChange} name="email" placeholder="Actualizar email" type="text" value={usuario.email}/>
-                <TextareaInput label="Numero" handleChange={handleChange} name="numero" placeholder="Actualizar numero" type="number" value={usuario.numero}/>
+                <InputForm label="Rut" handleChange={handleChange} name="rut" placeholder="Actualizar rut" type="text" value={usuario.rut}/>
+                <InputForm label="Nombre" handleChange={handleChange} name="nombre" placeholder="Actualizar nombre" type="text" value={usuario.nombre}/>
+                <InputForm label="Domicilio" handleChange={handleChange} name="domicilio" placeholder="Actualizar domicilio" type="text" value={usuario.domicilio}/>
+                <InputForm label="Email" handleChange={handleChange} name="email" placeholder="Actualizar email" type="text" value={usuario.email}/>
+                <InputForm label="Numero" handleChange={handleChange} name="numero" placeholder="Actualizar numero" type="number" value={usuario.numero}/>
                 <FormControl id="tipoUsuario">
                     <h1>Tipo de usuario</h1>
                     <Select name={"tipoUsuario"} onChange = {handleChange} placeholder='Seleccione el tipo de usuario' value={usuario.tipoUsuario}>
@@ -93,20 +134,3 @@ const editar = ({ data }) => {
 }
 
 export default editar
-
-/*return(
-    <div>
-    {data.nombre}
-    </div> 
-    )
-
-    rut:'',
-        nombre:'',
-        domicilio:'',
-        email:'',
-        numero:'',
-        tipoUsuario:'',
-        estadoUsuario:''
-
-*/
-

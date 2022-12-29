@@ -8,8 +8,8 @@ const NuevoTurno = () => {
     const [fecha, setFecha] = useState('')
     const [tipo, setTipo] = useState('0')
     const [idUsuario, setIdUsuario] = useState('')
-    const [entrada, setEntrada] = useState('')
-    const [salida, setSalida] = useState('')
+    const [horaEntrada, setHoraEntrada] = useState('')
+    const [horaSalida, setHoraSalida] = useState('')
 
     const [isOpen, setIsOpen] = useState(false)
 
@@ -21,8 +21,8 @@ const guardarTurno = async () => {
             fecha: fecha,
             tipo: tipo,
             idUsuario: idUsuario,
-            entrada: entrada,
-            salida: salida
+            horaEntrada: horaEntrada,
+            horaSalida: horaSalida,
         })
         setIsOpen(true)
         } catch (error) {
@@ -42,15 +42,16 @@ const router = useRouter()
   // Define la función que maneja el evento de click del botón de cancelar
 const handleAccept = () => {
     handleClose()
-    router.push('./administracionTurnos')
+    router.push('../turnos/administracionTurnos')
 }
 
 const handleCancel = () =>{
-    router.push('./administracionTurnos')
+    router.push('../turnos/administracionTurnos')
 }
 
 return(
-    <Box display="flex" justifyContent="center" alignItems="center" h="2xl">
+    // arreglar  el center 
+  <Box class="flex-1 items-center justify-center w-1.5">
     <form onSubmit={handleSubmit}>
         <Stack isInline={false}>
         <FormControl>
@@ -72,16 +73,14 @@ return(
         </FormControl>
         <FormControl>
             <FormLabel>Horario de Entrada</FormLabel>
-            <Input type="time" value={entrada} onChange={(event) =>
-            setEntrada(event.target.value)} />
+            <Input type="time" value={horaEntrada} onChange={(event) => setHoraEntrada(event.target.value)} />
         </FormControl>
         <FormControl>
             <FormLabel>Horario de Salida</FormLabel>
-            <Input type="time" value={salida} onChange={(event) =>
-            setSalida(event.target.value)} />
+            <Input type="time" value={horaSalida} onChange={(event) => setHoraSalida(event.target.value)} />
         </FormControl>
-        <Button type="submit" mr={4}>Guardar Turno</Button>
-        <Button onClick={handleCancel}>Cancelar</Button>
+        <Button type="submit" mr={4} colorScheme="teal">Guardar Turno</Button>
+        <Button onClick={handleCancel} colorScheme="red">Cancelar</Button>
         <Modal isOpen={isOpen} onClose={handleClose}>
             <ModalOverlay />
             <ModalContent>

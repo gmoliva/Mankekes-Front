@@ -9,7 +9,7 @@ function getUsuarios(){
     .then(response => response.json())
 }
 
-const administracionTurnos = () => {
+const AdministracionTurnos = () => {
 
 const [turnos, setTurnos] = useState([{
     fecha: '',
@@ -22,17 +22,26 @@ const [usuarios, setUsuarios] = useState({})
 const router = useRouter()
 
 const contentTable = () => {
+    
     return turnos.map(turno => {
+        const entrada = new Date(turno.entrada)
+        entrada.setHours(entrada.getHours());
+
+        const salida = new Date(turno.salida)
+        salida.setHours(salida.getHours());
         return (
         <Tr key={turno._id}>
             <Td>{turno.fecha.substring(0,10)}</Td>
             <Td>{turno.tipo.toString().replace("0","Dia").replace("1","Noche")}</Td>
-            <Td>{turno.entrada}</Td>
-            <Td>{turno.salida}</Td>
+            <Td>{entrada.toLocaleString().substring(11,20)}</Td>
+            <Td>{salida.toLocaleString().substring(11,20)}</Td>
             <Td>{turno.idUsuario?.nombre}</Td>
             <Td>
             <HStack>
-                <Button colorScheme={"orange"} onClick={() => router.push(`./administracionTurnos`)}>Editar Turno</Button>
+                <Button colorScheme={"orange"} onClick={() =>
+                    router.push(`./${turno._id}`)}>
+                        Editar Turno
+                </Button>
             </HStack>
             </Td>
             <Td>
@@ -131,4 +140,4 @@ return (
 )
 }
 
-export default administracionTurnos
+export default AdministracionTurnos

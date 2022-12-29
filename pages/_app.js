@@ -19,7 +19,7 @@ function MyApp({Component, pageProps}) {
 		<ChakraProvider> 
 			<HStack>
 				<Component {...pageProps} />
-				<Sidebar></Sidebar>
+        {/* <Sidebar></Sidebar> */}
 			</HStack>
 		</ChakraProvider>
 	)

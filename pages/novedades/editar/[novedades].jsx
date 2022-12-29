@@ -56,8 +56,9 @@ const editar = ({ dat }) => {
 
     
     const handleClick = async event => {
+        console.log(router.query)
         await delay(1300);
-        Router.push ('../novedad')
+        Router.push (`../mostrar/${novedad.idTurno}`)
         //await delay(1);
         //Router.reload()
       };
@@ -69,6 +70,7 @@ const editar = ({ dat }) => {
         
           <Container maxW="container.xl" mt={10}>
             <Heading as={"h1"} size={"2xl"} textAlign={"center"}>Modificar descripcion de Novedad: {dat.asunto}</Heading>
+            <Button  variant='outline' onClick={()=> Router.push(`../mostrar/${novedad.idTurno}`)}>Atras</Button>
             <Stack spacing={4} mt={10}>
                 <TextareaInput label="Descripcion" handleChange={handleChange} name="descripcion" placeholder="Actualice la descripcion" type="text" value={novedad.descripcion} />
                 </Stack>
