@@ -30,8 +30,6 @@ const usuarios = () => {
         tipoUsuario = document.getElementById("tipoUsuario").value;
         estadoUsuario = document.getElementById("estadoUsuario").value;
         
-        //expresionMail = /\w+@\w+\.+[a-zA-Z]/;
-        const expresionRut ="";
         const expresionNombre = /^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/;
         const expresionDomicilio =/[a-zA-Z]+\s[A-Za-z0-9]+/;
         const expresionEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
@@ -70,6 +68,7 @@ const usuarios = () => {
         createUsuario(Usuario).then(res => {
             //console.log(res.data.name)
         })
+        
         Swal.fire({
             title: 'Se creo un nuevo usuario',
             confirmButtonColor: '#3085d6',
