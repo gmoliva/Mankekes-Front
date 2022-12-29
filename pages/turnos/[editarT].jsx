@@ -111,6 +111,7 @@ const EditarTurno = ({ data }) => {
                 </Modal>
 
                 <form onSubmit={handleSubmit}>
+                <Stack isInline={false}>
                     <FormControl isInvalid={!!error}>
                         <FormLabel htmlFor="fecha">Fecha del turno</FormLabel>
                         <Input
@@ -142,7 +143,7 @@ const EditarTurno = ({ data }) => {
                             id="idUsuario"
                             value={turno.idUsuario}
                             onChange={handleChange}
-                        >
+                            >
                             {usuarios.map(usuarios => (
                                 <option key={usuarios._id} value={usuarios._id}>{usuarios.nombre}</option>
                             ))}
@@ -157,7 +158,7 @@ const EditarTurno = ({ data }) => {
                             id="entrada"
                             value={turno.entrada}
                             onChange={handleChange}
-                        />
+                            />
                     <FormErrorMessage>{error}</FormErrorMessage>
                     </FormControl>
                     <FormControl isInvalid={!!error}>
@@ -177,6 +178,7 @@ const EditarTurno = ({ data }) => {
                         </Button>
                         <Button onClick={handleCancelClick}>Cancelar</Button>
                     </Stack>
+                </Stack>
                 </form>
             </Box>
         </ChakraProvider>
