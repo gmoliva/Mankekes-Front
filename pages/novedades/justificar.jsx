@@ -44,7 +44,8 @@ const justificar = () => {
 
     return (
         <Container maxW="container.xl" mt={10}>
-            <Heading as={"h1"} size={"2xl"} textAlign={"center"}>Crear Novedad</Heading>
+            <Heading as={"h1"} size={"2xl"} textAlign={"center"}>Panel de justificacion</Heading>
+            <Button onClick={()=> Router.push('../success')}>Atras</Button>
             <Stack spacing={4} mt={10}>
                 <TextareaInput label="Descripcion" handleChange={handleChange} name="justificacion" placeholder="Explique por que no puede asistir." type="text" value={novedad.justificacion} />
                 <InputForm label="Id de turno" handleChange={handleChange} name="idTurno" placeholder="A que turno no ira?" type="text" value={novedad.idTurno} /> 

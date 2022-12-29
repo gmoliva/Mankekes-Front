@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { getOnlyNovedades } from '../../data/novedades'
-import { deleteNovedad }  from '../../data/novedades'
 import Swal from 'sweetalert2'
 
 
@@ -18,57 +17,22 @@ const Novedad = () => {
     }])
     const router = useRouter()
 
-    
-    const delNovedad = async (id) =>{
-        const response = await deleteNovedad(id)
-        if (response.status == 200)
-            console.log("Eliminado")
-    }
-
-    const confirmDelete = async (id) => {
-        Swal.fire({
-            title:"Desea eliminar esta novedad?",
-            showDenyButton: true,
-            confirmButtonText: 'Confirmar',
-            denyButtonText: 'Cancelar',
-        }).then((result) => {
-            if (result.isDenied) {
-                Swal.fire("No se elimino la novedad")
-                return
-            }else if (result.isConfirmed){
-                delNovedad(id)
-                Swal.fire({
-                    title:'Eliminado',
-                    icon:'info',
-                    showConfirmButton: true
-                }).then((result) =>{
-                    if (result.isConfirmed)
-                    router.reload()})
-            }
-        }
-        )
-    }
-    
 
     const contentTable = () => {
         return novedad.map(novedad => {
             return (
                 <Tr key={novedad._id}>
-                    <Td>{novedad.tipo}</Td>
+                    <Td>{novedad.tipo.toString().replace("0","Novedad").replace("1","Justificacion")}</Td>
                     <Td>{novedad.asunto}</Td>
                     <Td>{novedad.descripcion}</Td>
-                    <Td>
-                        <HStack>
-                            <Button colorScheme={"orange"} onClick={() => router.push(`./editar/${novedad._id}`)}>Modificar</Button>
-                            <Button colorScheme={"teal"} onClick={() => confirmDelete(novedad._id)} >Eliminar</Button>
-                        </HStack>
-                    </Td>
+                    <Td>{novedad.idTurno?.fecha?.substring(0,10)}</Td>
+                    <Td>{novedad.idUsuario?.nombre}</Td>
                 </Tr>
             )
         })
     }
 
-    useEffect(() => {
+    useEffect(() =>{
         getOnlyNovedades().then(res => {
             setNovedades(res.data)
         })
@@ -81,7 +45,6 @@ const Novedad = () => {
                 <Heading as="h1" size="2xl" textAlign="center" mt="10">Novedades de turno</Heading>
                 <ButtonGroup variant='outline' spacing='1000'>
                 <Button onClick={()=> router.push('../success')}>Atras</Button>
-                <Button colorScheme='green' onClick={()=> router.push('./addNovedad')}>Agregar novedades</Button>
                 </ButtonGroup>
                         
                 <Stack spacing={4} mt="10">
@@ -91,7 +54,8 @@ const Novedad = () => {
                                 <Td>Tipo</Td>
                                  <Td>Asunto</Td>
 								 <Td>Descripcion de la novedad</Td>
-								 <Td>Acciones</Td>
+                                 <Td>Fecha de turno</Td>
+                                 <Td>Nombre del conserje</Td>
                             </Tr>
                         </Thead>
                         <Tbody>

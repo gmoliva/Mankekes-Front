@@ -11,7 +11,7 @@ const createNovedad = (novedad) => {
 }
 
 const getNovedad = async (id) => {
-    console.log(id)
+   // console.log(id)
     const response = await axios.get(`${process.env.SERVIDOR}/novedad/${id}`)
     return response
 }
@@ -31,11 +31,18 @@ const enviarJustificacion = async (id,justificacion) => {
     return response
 }
 
+const getNovedadesFrom = async (id) => {
+   // console.log(id)
+    const response = await axios.get(`${process.env.SERVIDOR}/novedad/getFromNov/${id}`)
+    return response
+}
+
 module.exports = {
     getOnlyNovedades,
     createNovedad,
     getNovedad,
     updateNovedad,
     deleteNovedad,
-    enviarJustificacion
+    enviarJustificacion,
+    getNovedadesFrom
 }
