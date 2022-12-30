@@ -14,15 +14,16 @@ function MyApp({Component, pageProps}) {
 			<Component {...pageProps} />
 		</ChakraProvider>
 	)
-	else
+	else if(typeof window !== 'undefined')
 	return ( 
 		<ChakraProvider> 
-			<HStack>
+			<HStack marginLeft={{base: 0, md: '60'}}>
 				<Component {...pageProps} />
-        {/* <Sidebar></Sidebar> */}
+        	<Sidebar></Sidebar>
 			</HStack>
 		</ChakraProvider>
 	)
+
 
 }
 
