@@ -33,6 +33,7 @@ const adminDashboard = () => {
             <Button onClick={() => router.push('../turnos/administracionTurnos')}>Crear Turnos</Button>
             <Button colorScheme={"teal"} onClick={() => router.push('../usuarios/crear')} >Crear usuario</Button> 
             <Button colorScheme={"teal"} onClick={() => router.push('../usuarios/mostrar')}>Ver empleados</Button>
+            <Button colorScheme={"teal"} onClick={() => router.push('../turnos/administracionTurnos')}>Administrar turnos</Button>
         </HStack>
         </Container>
     )
