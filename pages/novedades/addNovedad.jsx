@@ -10,7 +10,7 @@ import Swal from 'sweetalert2'
 import axios from 'axios'
 
 
-const addNovedad = () => {
+const AddNovedad = () => {
 
     const [novedad, setNovedades] = useState({
         asunto: '',
@@ -35,6 +35,14 @@ const addNovedad = () => {
         obtenerUsuarios()
     }, [])
 
+    function validar (){
+        var asunto =document.getElementById("asunto").value
+
+        if(asunto === ""){
+            return false
+        }return true;
+    }
+
     const handleChange = (e) => {
             setNovedades({
                 ...novedad,
@@ -44,25 +52,36 @@ const addNovedad = () => {
     console.log(novedad)
     const submitNovedades =(e) => {
         e.preventDefault()
-        let timerInterval
-        createNovedad(novedad).then(res => {
-            if (res.status == 200){
-                Swal.fire({
-                    title:'Novedad creada correctamente',
-                    icon:'success',
-                    timer:1000,
-                    timerProgressBar: false,
-                    showConfirmButton: false,
-
-                    willClose: () =>{
-                        clearInterval(timerInterval)
-                    }
-                })
+        const a = validar();
+        if (a === false) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Debe especificar un asunto'
+            })
+           // alert("Debe especificar un asunto")
+        }else if (a === true){
+            let timerInterval
+            createNovedad(novedad).then(res => {
+                if (res.status == 200){
+                    Swal.fire({
+                        title:'Novedad creada correctamente',
+                        icon:'success',
+                        timer:1000,
+                        timerProgressBar: false,
+                        showConfirmButton: false,
+    
+                        willClose: () =>{
+                            clearInterval(timerInterval)
+                        }
+                    })
+                    
+                    handleClick()
+                }
                 
-                handleClick()
-            }
-            
-        })
+            })     
+        }
+       
 
 
     }
@@ -70,8 +89,6 @@ const addNovedad = () => {
     const handleClick = async event => {
         await delay(1300);
         Router.push (`./mostrar/${novedad.idTurno}`)
-       // await delay(1100);
-       // Router.reload()
       };
 
     const delay = ms => new Promise(
@@ -83,12 +100,15 @@ const addNovedad = () => {
             <Heading as={"h1"} size={"2xl"} textAlign={"center"}>Crear Novedad</Heading>
             <Button  variant='outline' onClick={()=> Router.push('../turnos/conserjeriaTurnos')}>Atras</Button>
             <Stack spacing={4} mt={10}>
-                <InputForm label="Asunto" handleChange={handleChange} name="asunto" placeholder="Que sucedio?" type="text" value={novedad.asunto} />
+                <FormControl isRequired>
+                    <FormLabel>Asunto</FormLabel>
+                    <InputForm  handleChange={handleChange} name="asunto" placeholder="Que sucedio?" type="text" value={novedad.asunto} />
+                </FormControl>
                 <TextareaInput label="Descripcion" handleChange={handleChange} name="descripcion" placeholder="Describa como sucedio el problema" type="text" value={novedad.descripcion} />
-                <InputForm label="Id de Turno" handleChange={handleChange} name="idTurno" placeholder="Quien es usted?" type="text" value={novedad.idTurno} />
+                <InputForm label="Id de Turno" handleChange={handleChange} name="idTurno" placeholder="En que turno sucedio?" type="text" value={novedad.idTurno} />
                 <FormControl>
                     <FormLabel>Usuario</FormLabel>
-                    <Select value={novedad.idUsuario} onChange={(event) =>setNovedades({ ...novedad, idUsuario: event.target.value })}>
+                    <Select value={novedad.idUsuario} placeholder="Quien es usted?" onChange={(event) =>setNovedades({ ...novedad, idUsuario: event.target.value })}>
                         {usuarios.map((usuario) =>(
                             <option key={usuario._id} value={usuario._id}>{usuario.nombre}</option>
                         ))}
@@ -100,4 +120,4 @@ const addNovedad = () => {
     )
 }
 
-export default addNovedad
+export default AddNovedad

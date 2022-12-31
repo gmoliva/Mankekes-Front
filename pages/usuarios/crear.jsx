@@ -5,7 +5,7 @@ import {createUsuario} from '../../data/usuarios'
 import  Swal  from 'sweetalert2'
 import {  validate, clean, format, getCheckDigit } from 'rut.js'
 
-const usuarios = () => {
+const Usuarios = () => {
 
     const [Usuario, setProduct] = useState({
         rut:'',
@@ -30,12 +30,15 @@ const usuarios = () => {
         numero = document.getElementById("numero").value;
         tipoUsuario = document.getElementById("tipoUsuario").value;
         estadoUsuario = document.getElementById("estadoUsuario").value;
-
         const expresionNombre = /^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/;
         const expresionDomicilio =/[a-zA-Z]+\s[A-Za-z0-9]+/;
         const expresionEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
+        const expresionTelefono = /^\d{10}$/;
 
         if(rut === "" || nombre === "" || domicilio === "" || email === "" || numero === "" || tipoUsuario === "" || estadoUsuario === ""){
+            return false;
+        }else if(!validate(rut)){
+            alert("El rut no es valido")
             return false;
         }else if(!validate(rut)){
             alert("El rut no es valido")
@@ -49,6 +52,9 @@ const usuarios = () => {
         }else if(!expresionDomicilio.test(domicilio)){
             alert("El domicilio no valido")
             return false;
+        }else if(!expresionTelefono.test(numero)){
+            alert("El número de teléfono no valido")
+            return false;
         }
         return true; 
     }
@@ -58,7 +64,13 @@ const usuarios = () => {
             ...Usuario,
             [e.target.name]: e.target.value
         })  
+    }
 
+    const handleChangeRut = (e) => {
+        setProduct({
+            ...Usuario,
+            [e.target.name]: format(e.target.value)
+        })  
     }
 
     const submitProduct = (e) => {
@@ -73,6 +85,7 @@ const usuarios = () => {
             //console.log(res.data.name)
         })
         
+        
         Swal.fire({
             title: 'Se creo un nuevo usuario',
             confirmButtonColor: '#3085d6',
@@ -86,7 +99,6 @@ const usuarios = () => {
         
     }
 
-
     return (
         <Container maxW="container.xl" mt={10}>
             <Heading as={"h1"} size={"2xl"} textAlign={"center"}>Crear Usuario</Heading>
@@ -94,7 +106,7 @@ const usuarios = () => {
             <Stack spacing={4} mt={10}>
                 <FormControl id="rut" isRequired> 
                     <FormLabel>RUT</FormLabel>
-                    <Input name="rut" placeholder="12.345.678-9" type="text" onChange = {handleChange}/>
+                    <Input name="rut" placeholder="12.345.678-9" type="text" maxlength="12" onChange = {handleChangeRut}/>
                     {!validate(Usuario.rut) ? (
                         <FormHelperText>
                             Rut Invalido
@@ -120,8 +132,8 @@ const usuarios = () => {
                 </FormControl> 
 
                 <FormControl id="numero"> 
-                    <FormLabel>Numero de contacto</FormLabel>
-                    <Input name={"numero"} placeholder="912345678" type="number" onChange = {handleChange}/>
+                    <FormLabel>Número de teléfono</FormLabel>
+                    <Input name={"numero"} placeholder="12345678" type="tel" maxlength="8" onChange = {handleChange}/>   
                 </FormControl> 
 
                 <FormControl id="tipoUsuario">
@@ -139,14 +151,14 @@ const usuarios = () => {
                         <option name={"estadoUsuario"} onChange = {handleChange} value='1'>Desvinculado de la empresa</option>
                     </Select>
                 </FormControl> 
-
                 </Stack>
             <HStack>
                 <Button colorScheme="blue" mt={10} mb={10} onClick={submitProduct}>Crear</Button>
                 <Button colorScheme="red" mt={10} mb={10} onClick={() => router.push('../admin/dashboard')}>Cancelar</Button>
             </HStack>
         </Container>
+        
     )
 }
 
-export default usuarios
+export default Usuarios

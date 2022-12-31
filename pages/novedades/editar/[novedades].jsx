@@ -18,7 +18,7 @@ export const getServerSideProps = async (context) => {
 }
 
 
-const editar = ({ dat }) => {
+const Editar = ({ dat }) => {
     const [novedad, setNovedades] = useState(dat)
     const router = useRouter()
     const { novedades } = router.query
@@ -80,4 +80,4 @@ const editar = ({ dat }) => {
     )
 }
 
-export default editar
+export default Editar
