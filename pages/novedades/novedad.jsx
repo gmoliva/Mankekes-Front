@@ -38,13 +38,14 @@ const Novedad = () => {
         })
     }, [])
 
-
+    
+  // se cambia el push de router  para que se mantenga en  el panel de administrador
     return (
         <> 
             <Container maxW="container.xl">
                 <Heading as="h1" size="2xl" textAlign="center" mt="10">Novedades de turno</Heading>
                 <ButtonGroup variant='outline' spacing='1000'>
-                <Button onClick={()=> router.push('../success')}>Atras</Button>
+                <Button onClick={()=> router.push('../admin/dashboard')}>Atras</Button>
                 </ButtonGroup>
                         
                 <Stack spacing={4} mt="10">
