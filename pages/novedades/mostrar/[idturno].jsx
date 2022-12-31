@@ -87,7 +87,7 @@ const Novedad = () => {
                 <Heading as="h1" size="2xl" textAlign="center" mt="10">Novedades de turno</Heading>
                 <ButtonGroup variant='outline' spacing='1000'>
                 <Button onClick={()=> router.push(`../../turnos/conserjeriaTurnos`)}>Atras</Button>
-                <Button colorScheme='green' onClick={()=> router.push('../addNovedad')}>Agregar novedades</Button>
+                <Button colorScheme='green' onClick={()=> router.push(`../crear/${rt.query.idturno}`)}>Agregar novedades</Button>
                 </ButtonGroup>
                         
                 <Stack spacing={4} mt="10">
