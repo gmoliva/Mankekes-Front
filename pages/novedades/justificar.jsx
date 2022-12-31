@@ -1,11 +1,13 @@
 import { useState } from 'react'
-import { Button, Container, Heading, Stack } from '@chakra-ui/react'
+import { Button, Container, Heading, Stack, FormControl, FormLabel, Select  } from '@chakra-ui/react'
 import TextareaInput from '../../components/TextareaInput'
 import  InputForm  from '../../components/InputForm'
 import { enviarJustificacion } from '../../data/novedades'
 import Router from 'next/router'
 //import { useRouter } from 'next/router'
 import {useEffect} from 'react';
+import axios from 'axios'
+import Swal from 'sweetalert2'
 
 
 const justificar = () => {
@@ -18,24 +20,76 @@ const justificar = () => {
         idUsuario: ''
     })
 
+    const [usuarios, setUsuario] = useState ([])
+
+    const obtenerUsuarios  = async () => {
+        try{
+            const resultado = await axios.get('http://localhost:5000/api/Usuario')
+            setUsuario(resultado.data)
+        }catch(error){
+            console.log(error)
+        }
+
+    }
+
+    useEffect (() =>{
+        obtenerUsuarios()
+    }, [])
+
     const handleChange = (e) => {
             setNovedades({
                 ...novedad,
                 [e.target.name]: e.target.value
             })
     }
-    console.log(novedad)
+    function validar (){
+        
+        var justificacion =document.getElementById("justificacion").value;
+
+        if(justificacion === "" ){
+            return false
+        }
+        return true;
+    }
+
     const submitNovedades =(e) => {
         e.preventDefault()
-        enviarJustificacion(novedad)
-        handleClick()
+        const a = validar();
+        if (a === false) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Debe especificar el por que falta al turno'
+            })
+        }else if (a === true){
+            let timerInterval
+            enviarJustificacion(novedad.idUsuario,novedad).then(res => {
+                if (res.status == 200){
+                    Swal.fire({
+                        title:'Justificacion creada correctamente',
+                        icon:'success',
+                        timer:1000,
+                        timerProgressBar: false,
+                        showConfirmButton: false,
+    
+                        willClose: () =>{
+                            clearInterval(timerInterval)
+                        }
+                    })
+                    
+                    handleClick()
+                }
+                
+            })     
+        }
 
     }
 
     const handleClick = async event => {
-        Router.push ('./novedad')
+        await delay(1000);
+        Router.push ('../success')
         await delay(100);
-        Router.reload()
+        //Router.reload()
       };
 
     const delay = ms => new Promise(
@@ -44,13 +98,24 @@ const justificar = () => {
 
     return (
         <Container maxW="container.xl" mt={10}>
-            <Heading as={"h1"} size={"2xl"} textAlign={"center"}>Crear Novedad</Heading>
+            <Heading as={"h1"} size={"2xl"} textAlign={"center"}>Panel de justificacion</Heading>
+            <Button onClick={()=> Router.push('../success')}>Atras</Button>
             <Stack spacing={4} mt={10}>
-                <TextareaInput label="Descripcion" handleChange={handleChange} name="justificacion" placeholder="Explique por que no puede asistir." type="text" value={novedad.justificacion} />
+                <FormControl>
+                    <FormLabel>Descripcion</FormLabel>
+                    <TextareaInput  handleChange={handleChange} name="justificacion" placeholder="Explique por que no puede asistir." type="text" value={novedad.justificacion} />
+                </FormControl>
                 <InputForm label="Id de turno" handleChange={handleChange} name="idTurno" placeholder="A que turno no ira?" type="text" value={novedad.idTurno} /> 
-                <InputForm label="Id de Usuario" handleChange={handleChange} name="idUsuario" placeholder="Quien es usted?" type="text" value={novedad.idUsuario} /> 
+                <FormControl>
+                    <FormLabel>Usuario</FormLabel>
+                    <Select value={novedad.idUsuario} placeholder="Quien es usted?" onChange={(event) =>setNovedades({ ...novedad, idUsuario: event.target.value })}>
+                        {usuarios.map((usuario) =>(
+                            <option key={usuario._id} value={usuario._id}>{usuario.nombre}</option>
+                        ))}
+                    </Select>
+                </FormControl>
                 </Stack>
-                <Button colorScheme="green" mt={10} mb={10} onClick={submitNovedades}>Crear nueva novedad</Button>
+                <Button colorScheme="green" mt={10} mb={10} onClick={submitNovedades}>Crear justificacion</Button>
         </Container>
     )
 }

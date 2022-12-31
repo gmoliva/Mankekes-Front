@@ -1,6 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import {  Button, Container, HStack, Input } from '@chakra-ui/react'
+import {  Button, ButtonGroup, Container, HStack, Input } from '@chakra-ui/react'
 import { isAdmin } from '../../data/usuarios'
 
 
@@ -29,10 +29,13 @@ const adminDashboard = () => {
             <h1>This is the admin landing page</h1>
         </div>
         <HStack>
+            <ButtonGroup gap='5'>
             <Button onClick={onSubmit}>Enviar mensajes</Button>
-            <Button onClick={() => router.push('./turnos')}>Crear Turnos</Button>
+            <Button onClick={() => router.push('../turnos/administracionTurnos')}>Crear Turnos</Button>
             <Button colorScheme={"teal"} onClick={() => router.push('../usuarios/crear')} >Crear usuario</Button> 
             <Button colorScheme={"teal"} onClick={() => router.push('../usuarios/mostrar')}>Ver empleados</Button>
+            <Button colorScheme={"teal"} onClick={() => router.push('../novedades/novedad')}>Novedades</Button>
+            </ButtonGroup>
         </HStack>
         </Container>
     )

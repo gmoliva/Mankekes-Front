@@ -63,7 +63,8 @@ const Mostrar = () => {
                     <Td>{showEstado(conserje.estadoUsuario)}</Td>
                     <Td>
                         <HStack>
-                            <Button colorScheme={"orange"} onClick={() => router.push(`./editar/${conserje._id}`)}>Modificar</Button>                   
+                            <Button colorScheme={"orange"} onClick={() => router.push(`./editar/${conserje._id}`)}>Modificar</Button>      
+                            <Button colorScheme={"red"} >Despedir</Button>                
                             <Button colorScheme={"teal"} onClick={() => confirmDelete(conserje._id)}>Eliminar</Button>
                         </HStack>
                     </Td>
