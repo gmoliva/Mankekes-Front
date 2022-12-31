@@ -10,7 +10,7 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 
 
-const justificar = () => {
+const Justificar = () => {
 
     const [novedad, setNovedades] = useState({
         tipo: 1,
@@ -120,4 +120,4 @@ const justificar = () => {
     )
 }
 
-export default justificar
+export default Justificar

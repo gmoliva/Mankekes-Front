@@ -4,7 +4,7 @@ import {  Button, ButtonGroup, Container, HStack, Input } from '@chakra-ui/react
 import { isAdmin } from '../../data/usuarios'
 
 
-const adminDashboard = () => {
+const AdminDashboard = () => {
 
     const router = useRouter()
 
@@ -42,4 +42,4 @@ const adminDashboard = () => {
 }
 
 
-export default adminDashboard
+export default AdminDashboard
