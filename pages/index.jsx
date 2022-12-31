@@ -22,8 +22,10 @@ const Index = () => {
 			localStorage.setItem('token', usrType.data.userId)
 			//console.log(response.data.user)
 			if(usrType.status === 202){
+				localStorage.setItem('userType', 0)
 				router.push('./admin/dashboard')
 			} else if(usrType.status === 200){
+				localStorage.setItem('userType', 1)
 				router.push('./success')
 
 			}

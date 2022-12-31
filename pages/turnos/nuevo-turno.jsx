@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FormControl, FormLabel, Input, Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, ModalCloseButton, Select, Stack, Box, FormErrorMessage } from '@chakra-ui/react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
@@ -10,10 +10,25 @@ const NuevoTurno = () => {
     const [idUsuario, setIdUsuario] = useState('')
     const [horaEntrada, setHoraEntrada] = useState('')
     const [horaSalida, setHoraSalida] = useState('')
+    const [usuarios, setUsuarios] = useState([])
 
     const [isOpen, setIsOpen] = useState(false)
 
     const handleClose = () => setIsOpen(false)
+
+    const obtenerUsuarios = async () => {
+        try{
+            const resultado = await axios.get('http://localhost:5000/api/Usuario')
+            setUsuarios(resultado.data)
+        }catch(error){
+            console.error(error)
+        }
+    }
+
+    useEffect(() =>{
+        obtenerUsuarios()
+    }, [])
+
   // Define la función que enviará la solicitud POST al servidor
 const guardarTurno = async () => {
     try {
@@ -67,9 +82,12 @@ return(
             </Select>
         </FormControl>
         <FormControl>
-            <FormLabel>ID de Usuario</FormLabel>
-            <Input type="text" value={idUsuario} onChange={(event) =>
-            setIdUsuario(event.target.value)} />
+            <FormLabel>Usuario</FormLabel>
+            <Select value={idUsuario} onChange={(event) => setIdUsuario(event.target.value)}>
+                {usuarios.map((usuario) =>(
+                    <option key={usuario._id} value={usuario._id}>{usuario.nombre}</option>
+                ))}
+            </Select>
         </FormControl>
         <FormControl>
             <FormLabel>Horario de Entrada</FormLabel>
