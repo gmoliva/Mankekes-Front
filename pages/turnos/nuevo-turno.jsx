@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { FormControl, FormLabel, Input, Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, ModalCloseButton, Select, Stack, Box, FormErrorMessage } from '@chakra-ui/react'
+import { Container, Heading,  FormControl, FormLabel, Input, Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, ModalCloseButton, Select, Stack, Box, FormErrorMessage, ChakraProvider } from '@chakra-ui/react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 
 const NuevoTurno = () => {
-  // Define el estado para cada campo del formulario
     const [fecha, setFecha] = useState('')
     const [tipo, setTipo] = useState('0')
     const [idUsuario, setIdUsuario] = useState('')
@@ -29,32 +28,29 @@ const NuevoTurno = () => {
         obtenerUsuarios()
     }, [])
 
-  // Define la función que enviará la solicitud POST al servidor
+
 const guardarTurno = async () => {
     try {
-        await axios.post('http://localhost:5000/api/Turno', {
-            fecha: fecha,
-            tipo: tipo,
-            idUsuario: idUsuario,
-            horaEntrada: horaEntrada,
-            horaSalida: horaSalida,
-        })
-        setIsOpen(true)
-        } catch (error) {
-        console.error(error)
+            await axios.post('http://localhost:5000/api/Turno', {
+                fecha: fecha,
+                tipo: tipo,
+                idUsuario: idUsuario,
+                horaEntrada: horaEntrada,
+                horaSalida: horaSalida,
+            })
+            setIsOpen(true)
+            } catch (error) {
+            console.error(error)
+        }
     }
-}
 
-  // Define la función que maneja el evento de submit del formulario
 const handleSubmit = (event) => {
     event.preventDefault()
     guardarTurno()
 }
 
-  // Obtiene la instancia de `useRouter` de NextJS para redirigir al usuario
 const router = useRouter()
 
-  // Define la función que maneja el evento de click del botón de cancelar
 const handleAccept = () => {
     handleClose()
     router.push('../turnos/administracionTurnos')
@@ -65,8 +61,8 @@ const handleCancel = () =>{
 }
 
 return(
-    // arreglar  el center 
-  <Box class="flex-1 items-center justify-center w-1.5">
+    <Container maxW="container.xl">
+    <Heading as="h1" size="2xl" textAlign="center" mt="10">Nuevo Turno</Heading>
     <form onSubmit={handleSubmit}>
         <Stack isInline={false}>
         <FormControl>
@@ -76,14 +72,14 @@ return(
         </FormControl>
         <FormControl>
             <FormLabel >Tipo de Turno</FormLabel>
-            <Select value={tipo} onChange={(event) => setTipo(event.target.value)}>
+            <Select placeholder="Seleccione el tipo de turno" onChange={(event) => setTipo(event.target.value)}>
                 <option value='0'>Dia</option>
                 <option value='1'>Noche</option>
             </Select>
         </FormControl>
         <FormControl>
             <FormLabel>Usuario</FormLabel>
-            <Select value={idUsuario} onChange={(event) => setIdUsuario(event.target.value)}>
+            <Select value={idUsuario} placeholder="Seleccione un Usuario" onChange={(event) => setIdUsuario(event.target.value)}>
                 {usuarios.map((usuario) =>(
                     <option key={usuario._id} value={usuario._id}>{usuario.nombre}</option>
                 ))}
@@ -116,7 +112,7 @@ return(
         </Modal>
         </Stack>
     </form>
-    </Box>
+    </Container>
 )
 
 }

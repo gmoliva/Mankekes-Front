@@ -1,7 +1,7 @@
 import React, { useState,  useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { ChakraProvider, Box, FormControl, FormLabel, Input, FormErrorMessage, Select, Button, Modal, ModalBody, ModalFooter, ModalHeader, ModalOverlay, ModalContent, ModalCloseButton, Stack } from '@chakra-ui/react'
+import { ChakraProvider, Box, Container, Heading, FormControl, FormLabel, Input, FormErrorMessage, Select, Button, Modal, ModalBody, ModalFooter, ModalHeader, ModalOverlay, ModalContent, ModalCloseButton, Stack } from '@chakra-ui/react'
 import moment from "moment";
 
 export const getServerSideProps = async (context) => {
@@ -49,9 +49,6 @@ const EditarTurno = ({ data }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        
-        // const entrada = new Date(Date.parse(`${turno.entrada}`));
-        // const salida = new Date(Date.parse(`${turno.salida}`));
 
         const entrada = moment(`${turno.fecha} ${turno.entrada}`, "YYYY-MM-DD HH:mm").toDate();
         const salida = moment(`${turno.fecha} ${turno.salida}`, "YYYY-MM-DD HH:mm").toDate();
@@ -81,7 +78,6 @@ const EditarTurno = ({ data }) => {
                 setIsModalOpen(true)
             }
         })
-        // console.log(turno.fecha, turno.tipo, turno.idUsuario, turno.entrada, turno.salida);
     }
 
     const handleModalClose = () => {
@@ -94,8 +90,8 @@ const EditarTurno = ({ data }) => {
     }
 
     return(
-        <ChakraProvider>
-            <Box maxWidth="800px" margin="0 auto" p={8}>
+        <Container maxW="container.xl">
+        <Heading as="h1" size="2xl" textAlign="center" mt="10">Editar Turno</Heading>
                 <Modal isOpen={isModalOpen} onClose={handleModalClose}>
                     <ModalOverlay />
                     <ModalContent>
@@ -180,8 +176,7 @@ const EditarTurno = ({ data }) => {
                     </Stack>
                 </Stack>
                 </form>
-            </Box>
-        </ChakraProvider>
+        </Container>
     )
 }
 
