@@ -10,7 +10,7 @@ import Swal from 'sweetalert2'
 import axios from 'axios'
 
 
-const addNovedad = () => {
+const AddNovedad = () => {
 
     const [novedad, setNovedades] = useState({
         asunto: '',
@@ -120,4 +120,4 @@ const addNovedad = () => {
     )
 }
 
-export default addNovedad
+export default AddNovedad

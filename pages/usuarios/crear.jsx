@@ -4,9 +4,8 @@ import { useRouter } from 'next/router'
 import {createUsuario} from '../../data/usuarios'
 import  Swal  from 'sweetalert2'
 import {  validate, clean, format, getCheckDigit } from 'rut.js'
-import {  validate, clean, format, getCheckDigit } from 'rut.js'
 
-const usuarios = () => {
+const Usuarios = () => {
 
     const [Usuario, setProduct] = useState({
         rut:'',
@@ -152,14 +151,6 @@ const usuarios = () => {
                         <option name={"estadoUsuario"} onChange = {handleChange} value='1'>Desvinculado de la empresa</option>
                     </Select>
                 </FormControl> 
-
-                <HStack>
-                    <h1>Imagen del usuario</h1>
-                    <form id="upload-form">
-                        <input id="file-field" type="file" />
-                    </form>
-                </HStack>
-
                 </Stack>
             <HStack>
                 <Button colorScheme="blue" mt={10} mb={10} onClick={submitProduct}>Crear</Button>
@@ -170,4 +161,4 @@ const usuarios = () => {
     )
 }
 
-export default usuarios
+export default Usuarios

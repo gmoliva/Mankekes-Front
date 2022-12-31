@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const login =  (rut) => {
     const response =  axios.post(`${process.env.SERVIDOR}/usuario/usr/login/`, { rut });
-    console.log(`${process.env.SERVIDOR}/usuario/login/`, { rut })
+    //console.log(`${process.env.SERVIDOR}/usuario/login/`, { rut })
     return response
 }
 

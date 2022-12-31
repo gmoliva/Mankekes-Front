@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 
 
 
-const conserjeDb = () => {
+const ConserjeDb = () => {
     const router = useRouter()
     return (
         <div>
@@ -17,4 +17,4 @@ const conserjeDb = () => {
     )
 }
 
-export default conserjeDb
+export default ConserjeDb
