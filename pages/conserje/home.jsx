@@ -3,14 +3,12 @@ import React from 'react'
 import { useRouter } from 'next/router'
 
 
-
 const ConserjeDb = () => {
     const router = useRouter()
     return (
         <div>
             <h1>Buenas Conserje, que desea hacer hoy</h1>
-                <Button colorScheme={"blue"} onClick={() => router.push('./novedades/justificar')}>Justificacion</Button>
-                <Button colorScheme={"teal"} onClick={() => router.push('./turnos/conserjeriaTurnos')}>Ver mis turnos</Button>
+                <Button colorScheme={"teal"} onClick={() => router.push('../turnos/conserjeriaTurnos')}>Ver mis turnos</Button>
 
         </div>
     )

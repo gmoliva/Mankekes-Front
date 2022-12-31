@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { Button, Container, Heading, Stack, FormControl, FormLabel, Select  } from '@chakra-ui/react'
-import TextareaInput from '../../components/TextareaInput'
-import  InputForm  from '../../components/InputForm'
-import { enviarJustificacion } from '../../data/novedades'
+import TextareaInput from '../../../components/TextareaInput'
+import  InputForm  from '../../../components/InputForm'
+import { enviarJustificacion } from '../../../data/novedades'
 import Router from 'next/router'
 //import { useRouter } from 'next/router'
 import {useEffect} from 'react';
@@ -63,6 +63,9 @@ const Justificar = () => {
             })
         }else if (a === true){
             let timerInterval
+            novedad.idUsuario = localStorage.getItem('token')
+            novedad.idTurno = Router.query.justificar
+
             enviarJustificacion(novedad.idUsuario,novedad).then(res => {
                 if (res.status == 200){
                     Swal.fire({
@@ -87,7 +90,7 @@ const Justificar = () => {
 
     const handleClick = async event => {
         await delay(1000);
-        Router.push ('../success')
+        Router.push (`/turnos/}`)
         await delay(100);
         //Router.reload()
       };
@@ -99,22 +102,13 @@ const Justificar = () => {
     return (
         <Container maxW="container.xl" mt={10}>
             <Heading as={"h1"} size={"2xl"} textAlign={"center"}>Panel de justificacion</Heading>
-            <Button onClick={()=> Router.push('../success')}>Atras</Button>
+            <Button onClick={()=> Router.push('/turnos/conserjeriaTurnos')}>Atras</Button>
             <Stack spacing={4} mt={10}>
                 <FormControl>
                     <FormLabel>Descripcion</FormLabel>
                     <TextareaInput  handleChange={handleChange} name="justificacion" placeholder="Explique por que no puede asistir." type="text" value={novedad.justificacion} />
                 </FormControl>
-                <InputForm label="Id de turno" handleChange={handleChange} name="idTurno" placeholder="A que turno no ira?" type="text" value={novedad.idTurno} /> 
-                <FormControl>
-                    <FormLabel>Usuario</FormLabel>
-                    <Select value={novedad.idUsuario} placeholder="Quien es usted?" onChange={(event) =>setNovedades({ ...novedad, idUsuario: event.target.value })}>
-                        {usuarios.map((usuario) =>(
-                            <option key={usuario._id} value={usuario._id}>{usuario.nombre}</option>
-                        ))}
-                    </Select>
-                </FormControl>
-                </Stack>
+            </Stack>
                 <Button colorScheme="green" mt={10} mb={10} onClick={submitNovedades}>Crear justificacion</Button>
         </Container>
     )

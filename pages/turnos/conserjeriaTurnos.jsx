@@ -22,6 +22,7 @@ const Turnos = () => {
                     <Td>
                         <HStack>
                             <Button colorScheme={"orange"} onClick={() => router.push(`../novedades/mostrar/${turno._id}`)}>Mostrar Novedades</Button>
+                            <Button colorScheme={"blue"} onClick={() => router.push(`../novedades/justificar/${turno._id}`)}>Justificacion</Button>
                         </HStack>
                     </Td>
                 </Tr>
@@ -40,7 +41,7 @@ const Turnos = () => {
         <>
             <Container maxW="container.xl" marginLeft={{base: 0, md: '60'}}>
                 <Heading as="h1" size="2xl" textAlign="center" mt="10">Seleccione un turno</Heading>         
-                <Button  variant='outline' onClick={()=> router.push('../success')}>Atras</Button>                
+                <Button  variant='outline' onClick={()=> router.push('../conserje/home')}>Atras</Button>                
                 <Stack spacing={4} mt="10">
                     <Table variant="simple">
                         <Thead>

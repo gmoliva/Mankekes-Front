@@ -69,8 +69,6 @@ return(
         <NavItem icon={MdCalendarToday} onClick={() => router.push('../turnos/administracionTurnos')}>Turnos</NavItem>
         <NavItem icon={HiCollection}>Novedades</NavItem>
         <NavItem icon={FaClipboardCheck}>Perfil</NavItem>
-        <NavItem icon={HiCode}>Integrations</NavItem>
-        <NavItem icon={AiFillGift}>Changelog</NavItem>
         <NavItem icon={BsGearFill}>Settings</NavItem>
     </Flex>
 </Box>
@@ -88,12 +86,10 @@ bg="brand.600" borderColor="blackAlpha.300" borderRightWidth="1px" w="60" {...pr
     </Text>
 </Flex>
 <Flex direction="column" as="nav" fontSize="sm" color="gray.600" aria-label="Main Navigation">
-    <NavItem icon={MdHome} onClick={() => router.push('/success') }>Home</NavItem>
+    <NavItem icon={MdHome} onClick={() => router.push('/conserje/home') }>Home</NavItem>
     <NavItem icon={MdCalendarToday} onClick={() => router.push('/turnos/conserjeriaTurnos')}>Mis Turnos</NavItem>
     <NavItem icon={HiCollection}>Mis Novedades</NavItem>
     <NavItem icon={FaClipboardCheck}>Perfil</NavItem>
-    <NavItem icon={HiCode}>Integrations</NavItem>
-    <NavItem icon={AiFillGift}>Changelog</NavItem>
     <NavItem icon={BsGearFill}>Settings</NavItem>
 </Flex>
 </Box>
@@ -104,8 +100,6 @@ const [isMobile] = useMediaQuery('(max-width: 600px)');
 
 if(!isMobile)
 return (
-    
-
         <Container>
     <SidebarContent display={{ base: "none", md: "unset" }} />
     <Drawer isOpen={sidebar.isOpen} onClose={sidebar.onClose} placement="left" colorScheme='black'>

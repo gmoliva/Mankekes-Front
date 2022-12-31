@@ -26,7 +26,7 @@ const Index = () => {
 				router.push('./admin/dashboard')
 			} else if(usrType.status === 200){
 				localStorage.setItem('userType', 1)
-				router.push('./success')
+				router.push('./conserje/home')
 
 			}
 		}

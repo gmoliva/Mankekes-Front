@@ -24,7 +24,7 @@ const Mailer = () => {
                     <Td>{usuario.email}</Td>
                     <Td>
                         <HStack>
-                            <Button colorScheme={"orange"} onClick={() => router.push(`./success`)}>Ver</Button>
+                            <Button colorScheme={"orange"} onClick={() => router.push(`/conserje/home`)}>Ver</Button>
                             <Button colorScheme={"teal"} onClick={() => router.push(`./mailer/send/${usuario._id}`)}>Enviar mensaje</Button>
                         </HStack>
                     </Td>
