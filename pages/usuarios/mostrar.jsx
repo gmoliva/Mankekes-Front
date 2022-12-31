@@ -12,6 +12,8 @@ const Mostrar = () => {
         domicilio: '',
         email: '',
         numero: '',
+        tipoUsuario: '',
+        estadoUsuario: ''
     }])
     const router = useRouter()
 
@@ -57,6 +59,8 @@ const Mostrar = () => {
                     <Td>{conserje.rut}</Td>
                     <Td>{conserje.email}</Td>
                     <Td>{conserje.numero}</Td>
+                    <Td>{showTipo(conserje.tipoUsuario)}</Td>
+                    <Td>{showEstado(conserje.estadoUsuario)}</Td>
                     <Td>
                         <HStack>
                             <Button colorScheme={"orange"} onClick={() => router.push(`./editar/${conserje._id}`)}>Modificar</Button>                   
@@ -69,6 +73,27 @@ const Mostrar = () => {
         })
     }
 
+    function showTipo(a){
+    var s = ""
+    if(a === 0){
+        s = "Administrador"
+    }else if(a === 1){
+        s = "Conserje"    
+    }
+        return s
+    }
+
+    function showEstado(a){
+        var s = ""
+        if(a === 0){
+            s = "Empleado activo"
+        }else if(a === 1){
+            s = "Empleado desvinculado"    
+        }
+            return s
+        }
+
+    //conserje.tipoUsuario
     useEffect(() => {
         getUsuarios().then(res => {
             setConserjes(res.data)
@@ -88,6 +113,8 @@ const Mostrar = () => {
                                 <Td>RUT</Td>
                                 <Td>E-mail</Td>
                                 <Td>Numero</Td>
+                                <Td>Tipo de usuario</Td>
+                                <Td>Estado</Td>
                                 <Td>Acciones</Td>
                             </Tr>
                         </Thead>

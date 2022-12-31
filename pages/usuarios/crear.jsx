@@ -3,6 +3,7 @@ import { Button, Container, Heading, HStack, Stack,Select, FormControl, FormLabe
 import { useRouter } from 'next/router'
 import {createUsuario} from '../../data/usuarios'
 import  Swal  from 'sweetalert2'
+import {  validate, clean, format, getCheckDigit } from 'rut.js'
 
 const usuarios = () => {
 
@@ -30,13 +31,15 @@ const usuarios = () => {
         tipoUsuario = document.getElementById("tipoUsuario").value;
         estadoUsuario = document.getElementById("estadoUsuario").value;
         
-        //expresionMail = /\w+@\w+\.+[a-zA-Z]/;
-        const expresionRut ="";
         const expresionNombre = /^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/;
         const expresionDomicilio =/[a-zA-Z]+\s[A-Za-z0-9]+/;
         const expresionEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
+        const expresionTelefono = /^\d{10}$/;
 
         if(rut === "" || nombre === "" || domicilio === "" || email === "" || numero === "" || tipoUsuario === "" || estadoUsuario === ""){
+            return false;
+        }else if(!validate(rut)){
+            alert("El rut no es valido")
             return false;
         }else if(!expresionNombre.test(nombre)){
             alert("El nombre no es valido")
@@ -47,6 +50,9 @@ const usuarios = () => {
         }else if(!expresionDomicilio.test(domicilio)){
             alert("El domicilio no valido")
             return false;
+        }else if(!expresionTelefono.test(numero)){
+            alert("El número de teléfono no valido")
+            return false;
         }
         return true; 
     }
@@ -56,7 +62,13 @@ const usuarios = () => {
             ...Usuario,
             [e.target.name]: e.target.value
         })  
+    }
 
+    const handleChangeRut = (e) => {
+        setProduct({
+            ...Usuario,
+            [e.target.name]: format(e.target.value)
+        })  
     }
 
     const submitProduct = (e) => {
@@ -70,6 +82,7 @@ const usuarios = () => {
         createUsuario(Usuario).then(res => {
             //console.log(res.data.name)
         })
+        
         Swal.fire({
             title: 'Se creo un nuevo usuario',
             confirmButtonColor: '#3085d6',
@@ -83,7 +96,6 @@ const usuarios = () => {
         
     }
 
-
     return (
         <Container maxW="container.xl" mt={10}>
             <Heading as={"h1"} size={"2xl"} textAlign={"center"}>Crear Usuario</Heading>
@@ -91,7 +103,7 @@ const usuarios = () => {
             <Stack spacing={4} mt={10}>
                 <FormControl id="rut"> 
                     <FormLabel>RUT</FormLabel>
-                    <Input name="rut" placeholder="01.234.567-8" type="text" onChange = {handleChange}/>
+                    <Input name="rut" placeholder="01.234.567-8" type="text" maxlength="12" onChange = {handleChangeRut}/>
                 </FormControl> 
 
                 <FormControl id="nombre"> 
@@ -110,8 +122,8 @@ const usuarios = () => {
                 </FormControl> 
 
                 <FormControl id="numero"> 
-                    <FormLabel>Numero de contacto</FormLabel>
-                    <Input name={"numero"} placeholder="912345678" type="number" onChange = {handleChange}/>
+                    <FormLabel>Número de teléfono</FormLabel>
+                    <Input name={"numero"} placeholder="12345678" type="tel" maxlength="8" onChange = {handleChange}/>   
                 </FormControl> 
 
                 <FormControl id="tipoUsuario">
@@ -130,12 +142,20 @@ const usuarios = () => {
                     </Select>
                 </FormControl> 
 
+                <HStack>
+                    <h1>Imagen del usuario</h1>
+                    <form id="upload-form">
+                        <input id="file-field" type="file" />
+                    </form>
+                </HStack>
+
                 </Stack>
             <HStack>
                 <Button colorScheme="blue" mt={10} mb={10} onClick={submitProduct}>Crear</Button>
                 <Button colorScheme="red" mt={10} mb={10} onClick={() => router.push('../admin/dashboard')}>Cancelar</Button>
             </HStack>
         </Container>
+        
     )
 }
 
