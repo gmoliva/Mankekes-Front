@@ -16,17 +16,13 @@ const Index = () => {
 	const onSubmit = async (e) => {
 		e.preventDefault()
 		const response = await login(rut)
-		if (response.status === 200) {
-			//localStorage.setItem('token', rut)
-			
+		if (response.status === 200) {			
 			const usrType = await isAdmin(rut)
 
-			const usrState = await getUsuario(usrType.data.userId)
-			
+			const usrState = await getUsuario(usrType.data.userId)	
 			if(usrState.data.estadoUsuario === 0){
 
 				localStorage.setItem('token', usrType.data.userId)
-			//console.log(response.data.user)
 			if(usrType.status === 202){
 				localStorage.setItem('userType', 0)
 				router.push('./admin/dashboard')
