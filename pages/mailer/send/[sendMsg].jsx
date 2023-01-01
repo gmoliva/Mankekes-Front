@@ -17,7 +17,7 @@ export const getServerSideProps = async (context) => {
     }
 }
 
-const Editar = ({ data }) => {
+const Message = ({ data }) => {
     const [conserje, setConserje] = useState(data)
     const router = useRouter()
     //const { cons } = router.query
@@ -30,7 +30,7 @@ const Editar = ({ data }) => {
 
     }
 
-    const submitProduct = async (e) => {
+    const sendMessage = async (e) => {
         e.preventDefault()
         const response = await sendMail(localStorage.getItem("token"), conserje.email, conserje.message)
         if (response.status === 202) {
@@ -40,7 +40,7 @@ const Editar = ({ data }) => {
                 showConfirmButton: true,
                 text: 'Mensaje enviado correctamente'
             }).then(() => {
-                router.push('/mailer')
+                router.push('../../usuarios/mostrar')
             })
         } else {
             Swal.fire({
@@ -56,15 +56,15 @@ const Editar = ({ data }) => {
         <Container maxW="container.xl" mt={10}>
             <Heading as={"h1"} size={"2xl"} textAlign={"center"}>Enviar mensaje a: {conserje.nombre}</Heading>
             <Stack spacing={4} mt={10}>
-                <InputForm label="Email" handleChange={handleChange} name="email" placeholder="Correo" value={conserje.email} />
+                {/* <InputForm label="Email" handleChange={handleChange} name="email" placeholder="Correo" value={conserje.email} /> */}
                 <TextareaInput label="Cuerpo" handleChange={handleChange} name="message" placeholder="Mensaje" value={conserje.message} />
             </Stack>
             <HStack>
-                <Button colorScheme="blue" mt={10} mb={10} onClick={submitProduct}>Editar producto</Button>
-                <Button colorScheme="red" mt={10} mb={10} onClick={() => router.push('/mailer')}>Cancelar</Button>
+                <Button colorScheme="blue" mt={10} mb={10} onClick={sendMessage}>Enviar</Button>
+                <Button colorScheme="red" mt={10} mb={10} onClick={() => router.push('../../usuarios/mostrar')}>Cancelar</Button>
             </HStack>
         </Container>
     )
 }
 
-export default Editar
+export default Message

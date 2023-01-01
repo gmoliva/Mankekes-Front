@@ -19,7 +19,7 @@ import { FaClipboardCheck, FaRss } from "react-icons/fa";
 import { AiFillGift } from "react-icons/ai";
 import { BsGearFill } from "react-icons/bs";
 import { HiCode, HiCollection } from "react-icons/hi";
-import { MdHome, MdCalendarToday } from "react-icons/md";
+import { MdHome, MdLogout, MdCalendarToday, MdPeople } from "react-icons/md";
 import React from "react";
 import { useRouter } from "next/router";
 
@@ -40,13 +40,20 @@ return (
           }} role="group" fontWeight="semibold" transition=".15s ease" {...rest}>
     {icon && (
     <Icon mr="2" boxSize="4" _groupHover={{
-                color: "gray.300",
+                color: "blue",
               }} as={icon} />
     )}
     {children}
 </Flex>
 );
 };
+
+const logout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userType');
+    return router.push('/');
+    
+}
 
 
 const SidebarContent = (props) => {
@@ -67,9 +74,10 @@ return(
     <Flex direction="column" as="nav" fontSize="sm" color="gray.600" aria-label="Main Navigation">
         <NavItem icon={MdHome} onClick={() => router.push('../admin/dashboard') }>Home</NavItem>
         <NavItem icon={MdCalendarToday} onClick={() => router.push('../turnos/administracionTurnos')}>Turnos</NavItem>
-        <NavItem icon={HiCollection}>Novedades</NavItem>
+        <NavItem icon={HiCollection} onClick={() => router.push('../novedades/novedad')}>Novedades</NavItem>
+        <NavItem icon={MdPeople} onClick={()=> router.push('../usuarios/mostrar')}>Empleados</NavItem>
         <NavItem icon={FaClipboardCheck}>Perfil</NavItem>
-        <NavItem icon={BsGearFill}>Settings</NavItem>
+        <NavItem icon={MdLogout} onClick={logout}>Logout</NavItem>
     </Flex>
 </Box>
 )
@@ -90,7 +98,7 @@ bg="brand.600" borderColor="blackAlpha.300" borderRightWidth="1px" w="60" {...pr
     <NavItem icon={MdCalendarToday} onClick={() => router.push('/turnos/conserjeriaTurnos')}>Mis Turnos</NavItem>
     <NavItem icon={HiCollection}>Mis Novedades</NavItem>
     <NavItem icon={FaClipboardCheck}>Perfil</NavItem>
-    <NavItem icon={BsGearFill}>Settings</NavItem>
+    <NavItem icon={MdLogout} onClick={logout}>Logout</NavItem>
 </Flex>
 </Box>
 )

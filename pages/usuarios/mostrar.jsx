@@ -64,7 +64,7 @@ const Mostrar = () => {
                     <Td>
                         <HStack>
                             <Button colorScheme={"orange"} onClick={() => router.push(`./editar/${conserje._id}`)}>Modificar</Button>      
-                            <Button colorScheme={"red"} >Enviar masaje</Button>                
+                            <Button colorScheme={"red"} onClick={() => router.push(`../mailer/send/${conserje._id}`)}>Enviar masaje</Button>                
                             <Button colorScheme={"teal"} onClick={() => confirmDelete(conserje._id)}>Eliminar</Button>
                         </HStack>
                     </Td>
@@ -106,6 +106,8 @@ const Mostrar = () => {
             <Container maxW="container.xl">
                 <Heading as="h1" size="2xl" textAlign="center" mt="10">Seleccione un conserje</Heading>
                 <Button variant='outline' spacing='1000' onClick={()=> router.push('../admin/dashboard')}>Atras</Button>
+                <Button variant='outline' spacing='1000' onClick={()=> router.push('./crear')}>Crear Usuario</Button>
+                
                 <Stack spacing={4} mt="10">
                     <Table variant="simple">     
                         <Thead>
