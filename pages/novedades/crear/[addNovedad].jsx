@@ -50,7 +50,7 @@ const AddNovedad = () => {
                 [e.target.name]: e.target.value
             })
     }
-    console.log(novedad)
+
     const submitNovedades =(e) => {
         e.preventDefault()
         const a = validar();
@@ -60,7 +60,7 @@ const AddNovedad = () => {
                 title: 'Error',
                 text: 'Debe especificar un asunto'
             })
-           // alert("Debe especificar un asunto")
+           
         }else if (a === true){
             let timerInterval
             novedad.idTurno = rt.query.addNovedad
