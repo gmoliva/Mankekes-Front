@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import { Button, Container, Heading, HStack, Input, Stack, Table, Thead, Tr, Td, Th, Tbody, FormControl, FormLabel } from '@chakra-ui/react'
+import { useState } from 'react'
+import { Button, Container, Heading, Input, Stack, FormControl, FormLabel, useToast } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { login,isAdmin,getUsuario} from '../data/usuarios'
 const Index = () => {
@@ -10,6 +10,8 @@ const Index = () => {
 	const handleChange = (e) => {
 		setRUT(e.target.value)
 	}
+
+	const toast = useToast()
 
 	const onSubmit = async (e) => {
 		e.preventDefault()
@@ -32,7 +34,15 @@ const Index = () => {
 				localStorage.setItem('userType', 1)
 				router.push('./conserje/home')
 			}}else {
-				alert("El rut que ingreso no corresponde a empleados activos de la empresa.")
+				toast({
+					title: 'Login invalido',
+					description: "El rut que ingreso no corresponde a empleados activos de la empresa.",
+					status: 'error',
+					duration: 2000,
+					isClosable: false,
+				  })
+				
+				//alert("El rut que ingreso no corresponde a empleados activos de la empresa.")
 			}
 			
 		}
