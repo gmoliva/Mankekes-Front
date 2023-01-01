@@ -26,6 +26,7 @@ const Novedad = () => {
                     <Td>{novedad.asunto}</Td>
                     <Td>{novedad.descripcion}</Td>
                     <Td>{novedad.idTurno?.fecha?.substring(0,10)}</Td>
+                    <Td>{novedad.idTurno?.tipo?.toString().replace("0","Dia").replace("1","Noche")}</Td>
                     <Td>{novedad.idUsuario?.nombre}</Td>
                 </Tr>
             )
@@ -56,6 +57,7 @@ const Novedad = () => {
                                  <Td>Asunto</Td>
 								 <Td>Descripcion de la novedad</Td>
                                  <Td>Fecha de turno</Td>
+                                 <Td>Tipo de turno</Td>
                                  <Td>Nombre del conserje</Td>
                             </Tr>
                         </Thead>
