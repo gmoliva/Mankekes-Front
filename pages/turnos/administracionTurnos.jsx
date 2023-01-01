@@ -23,14 +23,14 @@ const router = useRouter()
 
 const contentTable = () => {
     
-    return turnos.map(turno => {
+    return turnos.map((turno,index) => {
         const entrada = new Date(turno.entrada)
         entrada.setHours(entrada.getHours());
 
         const salida = new Date(turno.salida)
         salida.setHours(salida.getHours());
         return (
-        <Tr key={turno._id}>
+        <Tr key={index}>
             <Td>{turno.fecha.substring(0,10)}</Td>
             <Td>{turno.tipo.toString().replace("0","Dia").replace("1","Noche")}</Td>
             <Td>{entrada.toLocaleString().substring(11,20)}</Td>
