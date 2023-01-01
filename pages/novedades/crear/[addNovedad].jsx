@@ -7,7 +7,6 @@ import Router from 'next/router'
 import { useRouter } from 'next/router'
 import {useEffect} from 'react';
 import Swal from 'sweetalert2'
-import axios from 'axios'
 
 
 const AddNovedad = () => {
@@ -20,21 +19,6 @@ const AddNovedad = () => {
 
     })
 
-    const [usuarios, setUsuario] = useState ([])
-
-    const obtenerUsuarios  = async () => {
-        try{
-            const resultado = await axios.get('http://localhost:5000/api/Usuario')
-            setUsuario(resultado.data)
-        }catch(error){
-            console.log(error)
-        }
-
-    }
-
-    useEffect (() =>{
-        obtenerUsuarios()
-    }, [])
 
     function validar (){
         var asunto =document.getElementById("asunto").value

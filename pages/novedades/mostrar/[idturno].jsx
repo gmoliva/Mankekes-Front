@@ -1,10 +1,8 @@
 import { Button,ButtonGroup, Container, Heading, Input, Stack, Table, Tbody,Tr, Td, Thead, HStack } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
 import { getNovedadesFrom,deleteNovedad } from '../../../data/novedades'
 import Swal from 'sweetalert2'
-import Turnos from '../../turnos/conserjeriaTurnos'
 
 
 
@@ -68,7 +66,6 @@ const Novedad = () => {
         })
     }
     const rt = useRouter();
-    console.log(rt.query.idturno)
     
 
 
