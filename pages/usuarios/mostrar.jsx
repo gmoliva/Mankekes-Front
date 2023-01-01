@@ -59,6 +59,7 @@ const Mostrar = () => {
                     <Td>{conserje.rut}</Td>
                     <Td>{conserje.email}</Td>
                     <Td>{conserje.numero}</Td>
+                    <Td>{conserje.domicilio}</Td>
                     <Td>{showTipo(conserje.tipoUsuario)}</Td>
                     <Td>{showEstado(conserje.estadoUsuario)}</Td>
                     <Td>
@@ -116,6 +117,7 @@ const Mostrar = () => {
                                 <Td>RUT</Td>
                                 <Td>E-mail</Td>
                                 <Td>Numero</Td>
+                                <Td>Domicilio</Td>
                                 <Td>Tipo de usuario</Td>
                                 <Td>Estado</Td>
                                 <Td>Acciones</Td>
