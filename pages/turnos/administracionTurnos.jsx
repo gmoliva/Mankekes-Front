@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import axios from 'axios'
 
 function getUsuarios(){
-    return fetch('http://localhost:5000/api/Usuario')
+    return fetch(`${process.env.SERVIDOR}/api/Usuario`)
     .then(response => response.json())
 }
 
@@ -80,7 +80,7 @@ const closeModal = () => setIsOpen(false);
 
 async function deleteTurno(id){
     try{
-        await axios.delete(`http://localhost:5000/api/Turno/${id}`);
+        await axios.delete(`${process.env.SERVIDOR}/api/Turno/${id}`);
         setTurnos(turnos.filter(turno => turno._id !== id));
     }catch (error){
         console.error(error);

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Button, Container, Heading, HStack, Input, Stack, Table, Thead, Tr, Td, Th, Tbody } from '@chakra-ui/react'
+import { Button, Container, Heading, HStack, Stack, Table, Thead, Tr, Td, Tbody } from '@chakra-ui/react'
 import { getUsuarios } from '../data/usuarios'
 import { useRouter } from 'next/router'
 

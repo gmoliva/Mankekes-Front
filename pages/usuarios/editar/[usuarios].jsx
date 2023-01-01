@@ -1,9 +1,8 @@
 import {useState} from 'react'
 import {useRouter} from 'next/router'
-import TextareaInput from '../../../components/TextareaInput'
 import InputForm from '../../../components/InputForm'
 import Swal from 'sweetalert2'
-import { Button, Container, Heading,Stack,Select, FormControl,Input,FormLabel} from '@chakra-ui/react'
+import { Button, Container, Heading,Stack,Select, FormControl} from '@chakra-ui/react'
 import { getUsuario,updateUsuario} from '../../../data/usuarios'
 
 export const getServerSideProps = async (context) => {
