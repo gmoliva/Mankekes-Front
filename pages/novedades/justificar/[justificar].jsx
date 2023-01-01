@@ -90,7 +90,7 @@ const Justificar = () => {
 
     const handleClick = async event => {
         await delay(1000);
-        Router.push (`/turnos/}`)
+        Router.push (`/turnos/conserjeriaTurnos`)
         await delay(100);
         //Router.reload()
       };
