@@ -17,7 +17,9 @@ const NuevoTurno = () => {
 
     const obtenerUsuarios = async () => {
         try{
-            const resultado = await axios.get(`${process.env.SERVIDOR}/api/Usuario`)
+
+            const resultado = await axios.get(`${process.env.SERVIDOR}/Usuario/conserje`)
+
             setUsuarios(resultado.data)
         }catch(error){
             console.error(error)
@@ -31,7 +33,8 @@ const NuevoTurno = () => {
 
 const guardarTurno = async () => {
     try {
-            await axios.post(`${process.env.SERVIDOR}/api/Turno`, {
+
+            await axios.post('${process.env.SERVIDOR}/Turno', {
                 fecha: fecha,
                 tipo: tipo,
                 idUsuario: idUsuario,

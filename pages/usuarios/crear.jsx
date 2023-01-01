@@ -3,7 +3,7 @@ import { Button, Container, Heading, HStack, Stack,Select, FormControl, FormLabe
 import { useRouter } from 'next/router'
 import {createUsuario} from '../../data/usuarios'
 import  Swal  from 'sweetalert2'
-import {  validate, clean, format, getCheckDigit } from 'rut.js'
+import {  validate, format } from 'rut.js'
 
 const Usuarios = () => {
 
