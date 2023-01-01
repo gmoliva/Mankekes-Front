@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { getNovedadesFrom,deleteNovedad } from '../../../data/novedades'
 import Swal from 'sweetalert2'
+import Turnos from '../../turnos/conserjeriaTurnos'
 
 
 
@@ -20,7 +21,6 @@ const Novedad = () => {
     
     const delNovedad = async (id) =>{
         const response = await deleteNovedad(id)
-        
     }
 
     const confirmDelete = async (id) => {
@@ -66,6 +66,7 @@ const Novedad = () => {
         })
     }
     const rt = useRouter();
+    console.log(rt.query.idturno)
     
 
 
