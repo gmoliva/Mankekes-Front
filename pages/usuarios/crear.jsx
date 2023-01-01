@@ -33,7 +33,7 @@ const Usuarios = () => {
         const expresionNombre = /^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/;
         const expresionDomicilio =/[a-zA-Z]+\s[A-Za-z0-9]+/;
         const expresionEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
-        const expresionTelefono = /^\d{10}$/;
+        const expresionTelefono = /^\d{8}$/;
 
         if(rut === "" || nombre === "" || domicilio === "" || email === "" || numero === "" || tipoUsuario === "" || estadoUsuario === ""){
             return false;
@@ -53,7 +53,7 @@ const Usuarios = () => {
             alert("El domicilio no valido")
             return false;
         }else if(!expresionTelefono.test(numero)){
-            alert("El número de teléfono no valido")
+            alert("El número de teléfono no valido(8 digitos maximos)")
             return false;
         }
         return true; 
@@ -106,7 +106,7 @@ const Usuarios = () => {
             <Stack spacing={4} mt={10}>
                 <FormControl id="rut" isRequired> 
                     <FormLabel>RUT</FormLabel>
-                    <Input name="rut" placeholder="12.345.678-9" type="text" maxlength="12" onChange = {handleChangeRut}/>
+                    <Input name="rut" placeholder="12.345.678-9" type="text" maxLength="12" onChange = {handleChangeRut}/>
                     {!validate(Usuario.rut) ? (
                         <FormHelperText>
                             Rut Invalido
@@ -133,7 +133,7 @@ const Usuarios = () => {
 
                 <FormControl id="numero"> 
                     <FormLabel>Número de teléfono</FormLabel>
-                    <Input name={"numero"} placeholder="12345678" type="tel" maxlength="8" onChange = {handleChange}/>   
+                    <Input name={"numero"} placeholder="12345678" type="tel" maxLength="8" onChange = {handleChange}/>   
                 </FormControl> 
 
                 <FormControl id="tipoUsuario">
@@ -156,8 +156,7 @@ const Usuarios = () => {
                 <Button colorScheme="blue" mt={10} mb={10} onClick={submitProduct}>Crear</Button>
                 <Button colorScheme="red" mt={10} mb={10} onClick={() => router.push('../admin/dashboard')}>Cancelar</Button>
             </HStack>
-        </Container>
-        
+        </Container> 
     )
 }
 

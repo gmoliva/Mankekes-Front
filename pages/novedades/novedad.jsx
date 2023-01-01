@@ -19,9 +19,9 @@ const Novedad = () => {
 
 
     const contentTable = () => {
-        return novedad.map(novedad => {
+        return novedad.map((novedad,index) => {
             return (
-                <Tr key={novedad._id}>
+                <Tr key={index}>
                     <Td>{novedad.tipo.toString().replace("0","Novedad").replace("1","Justificacion")}</Td>
                     <Td>{novedad.asunto}</Td>
                     <Td>{novedad.descripcion}</Td>

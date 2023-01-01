@@ -3,11 +3,11 @@ import {useRouter} from 'next/router'
 import TextareaInput from '../../../components/TextareaInput'
 import InputForm from '../../../components/InputForm'
 import Swal from 'sweetalert2'
-import { Button, Container, Heading,Stack,Select, FormControl} from '@chakra-ui/react'
+import { Button, Container, Heading,Stack,Select, FormControl,Input,FormLabel} from '@chakra-ui/react'
 import { getUsuario,updateUsuario} from '../../../data/usuarios'
 
 export const getServerSideProps = async (context) => {
-    const response = await getUsuario(context.query.producto)
+    const response = await getUsuario(context.query.usuarios)
     return {
         props: {
             data: response.data
@@ -19,7 +19,7 @@ const Editar = ({ data }) => {
 
     const [usuario, setUsuario] = useState(data)
     const router = useRouter()
-    const { producto } = router.query
+    const { usuarios } = router.query
 
     function validar(){
 
@@ -36,6 +36,7 @@ const Editar = ({ data }) => {
         const expresionNombre = /^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/;
         const expresionDomicilio =/[a-zA-Z]+\s[A-Za-z0-9]+/;
         const expresionEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
+        const expresionTelefono = /^\d{8}$/;
 
         if(rut === "" || nombre === "" || domicilio === "" || email === "" || numero === "" || tipoUsuario === "" || estadoUsuario === ""){
             return false;
@@ -47,6 +48,9 @@ const Editar = ({ data }) => {
             return false;
         }else if(!expresionDomicilio.test(domicilio)){
             alert("El domicilio no valido")
+            return false;
+        }else if(!expresionTelefono.test(numero)){
+            alert("El número de teléfono no valido (maximos 8 números)")
             return false;
         }
         return true; 
@@ -74,7 +78,7 @@ const Editar = ({ data }) => {
             console.log("bien")
 
             let timerInterval
-        updateUsuario(producto,usuario).then(res => {
+        updateUsuario(usuarios,usuario).then(res => {
             if (res.status == 200){
                 Swal.fire({
                     title:'Usuario actualizado correctamente',
@@ -109,8 +113,9 @@ const Editar = ({ data }) => {
                 <InputForm label="Rut" handleChange={handleChange} name="rut" placeholder="Actualizar rut" type="text" value={usuario.rut}/>
                 <InputForm label="Nombre" handleChange={handleChange} name="nombre" placeholder="Actualizar nombre" type="text" value={usuario.nombre}/>
                 <InputForm label="Domicilio" handleChange={handleChange} name="domicilio" placeholder="Actualizar domicilio" type="text" value={usuario.domicilio}/>
-                <InputForm label="Email" handleChange={handleChange} name="email" placeholder="Actualizar email" type="text" value={usuario.email}/>
-                <InputForm label="Numero" handleChange={handleChange} name="numero" placeholder="Actualizar numero" type="number" value={usuario.numero}/>
+                <InputForm label="Email" handleChange={handleChange} name="email" placeholder="Actualizar email" type="text" value={usuario.email}/> 
+                <InputForm label="Numero" handleChange={handleChange} name="numero" placeholder="Actualizar numero" type="tel" maxLength="8" value={usuario.numero}/> 
+                
                 <FormControl id="tipoUsuario">
                     <h1>Tipo de usuario</h1>
                     <Select name={"tipoUsuario"} onChange = {handleChange} placeholder='Seleccione el tipo de usuario' value={usuario.tipoUsuario}>
