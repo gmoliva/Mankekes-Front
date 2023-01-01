@@ -40,9 +40,7 @@ const Index = () => {
 					status: 'error',
 					duration: 2000,
 					isClosable: false,
-				  })
-				
-				//alert("El rut que ingreso no corresponde a empleados activos de la empresa.")
+				  })				
 			}
 			
 		}
