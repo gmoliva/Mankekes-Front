@@ -4,7 +4,6 @@ import TextareaInput from '../../../components/TextareaInput'
 import  InputForm  from '../../../components/InputForm'
 import { enviarJustificacion } from '../../../data/novedades'
 import Router from 'next/router'
-//import { useRouter } from 'next/router'
 import {useEffect} from 'react';
 import axios from 'axios'
 import Swal from 'sweetalert2'
@@ -92,7 +91,6 @@ const Justificar = () => {
         await delay(1000);
         Router.push (`/turnos/conserjeriaTurnos`)
         await delay(100);
-        //Router.reload()
       };
 
     const delay = ms => new Promise(

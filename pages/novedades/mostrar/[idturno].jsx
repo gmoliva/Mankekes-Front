@@ -22,8 +22,7 @@ const Novedad = () => {
     
     const delNovedad = async (id) =>{
         const response = await deleteNovedad(id)
-        if (response.status == 200)
-            console.log("Eliminado")
+        
     }
 
     const confirmDelete = async (id) => {
