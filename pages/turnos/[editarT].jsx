@@ -5,8 +5,8 @@ import { ChakraProvider, Box, Container, Heading, FormControl, FormLabel, Input,
 import moment from "moment";
 
 export const getServerSideProps = async (context) => {
-    const turnoResponse = await axios.get(`http://localhost:5000/api/Turno/${context.query.editarT}`)
-    const usuariosResponse = await axios.get('http://localhost:5000/api/Usuario')
+    const turnoResponse = await axios.get(`${process.env.SERVIDOR}/api/Turno/${context.query.editarT}`)
+    const usuariosResponse = await axios.get(`${process.env.SERVIDOR}/api/Usuario`)
     return {
         props: {
             data: turnoResponse.data,
@@ -26,7 +26,7 @@ const EditarTurno = ({ data }) => {
 
     useEffect(() => {
         const obtenerTurno = async () => {
-            const response = await axios.get(`http://localhost:5000/api/Turno/${editarT}`)
+            const response = await axios.get(`${process.env.SERVIDOR}/api/Turno/${editarT}`)
             setTurno(response.data)
         }
         obtenerTurno()
@@ -34,7 +34,7 @@ const EditarTurno = ({ data }) => {
 
     useEffect(() => {
         const obtenerUsuarios = async () => {
-            const response = await axios.get('http://localhost:5000/api/Usuario')
+            const response = await axios.get(`${process.env.SERVIDOR}/api/Usuario`)
             setUsuarios(response.data)
         }
         obtenerUsuarios()
@@ -69,7 +69,7 @@ const EditarTurno = ({ data }) => {
             salida,
         });
 
-        axios.put(`http://localhost:5000/api/Turno/${editarT}`, {
+        axios.put(`${process.env.SERVIDOR}/api/Turno/${editarT}`, {
             ...turno,
             entrada,
             salida
