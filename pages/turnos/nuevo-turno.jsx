@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Container, Heading,  FormControl, FormLabel, Input, Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, ModalCloseButton, Select, Stack, FormErrorMessage } from '@chakra-ui/react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
+import Swal from 'sweetalert2';
 
 const NuevoTurno = () => {
     const [fecha, setFecha] = useState('')
@@ -35,13 +36,24 @@ const guardarTurno = async () => {
     if(validarHorario(tipo, horaEntrada) && validarHorarioSalida(tipo, horaEntrada, horaSalida) && validarHorariosDistintos(horaEntrada, horaSalida)){
 
         try {
-            await axios.post(`${process.env.SERVIDOR}/Turno`, {
+            let response = await axios.post(`${process.env.SERVIDOR}/Turno`, {
                 fecha: fecha,
                 tipo: tipo,
                 idUsuario: idUsuario,
                 horaEntrada: horaEntrada,
                 horaSalida: horaSalida,
             })
+            if(response.status === 202){
+                return Swal.fire({
+                    icon: 'error',
+                    title: 'Error al guardar',
+                    showConfirmButton: true,
+                    text: response.data.msg
+                }).then(() => {
+                    console.log("aweonao")
+                })
+            }
+
             setIsOpen(true)
         } catch (error) {
             console.error(error)
