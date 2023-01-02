@@ -21,6 +21,30 @@ const [turnos, setTurnos] = useState([{
 const [usuarios, setUsuarios] = useState({})
 const router = useRouter()
 
+function sortTurnosByDate(turnos){
+    return turnos.sort((a, b) =>{
+        const dateA = Date.parse(a.fecha);
+        const dateB = Date.parse(b.fecha);
+        return dateA - dateB;
+    });
+}
+
+useEffect(() =>{
+    getTurnos().then(res=>{
+        const sortedTurnos = sortTurnosByDate(res.data);
+        setTurnos(sortedTurnos);
+    });
+
+    getUsuarios().then(res => {
+        const usuariosMap = {}
+        if(res && res.data){
+        res.data.forEach(usuario => {
+            usuariosMap[usuario._id] = usuario
+        })
+    }
+        setUsuarios(usuariosMap)
+    })
+}, [])
 const contentTable = () => {
     
     return turnos.map((turno,index) => {
@@ -56,21 +80,6 @@ const contentTable = () => {
     })
 }
 
-useEffect(() =>{
-    getTurnos().then(res=>{
-        setTurnos(res.data)
-    })
-
-    getUsuarios().then(res => {
-        const usuariosMap = {}
-        if(res && res.data){
-        res.data.forEach(usuario => {
-            usuariosMap[usuario._id] = usuario
-        })
-    }
-        setUsuarios(usuariosMap)
-    })
-}, [])
 
 const [isOpen, setIsOpen] = useState(false);
 const [id,setId] = useState('');
