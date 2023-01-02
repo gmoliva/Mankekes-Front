@@ -32,10 +32,14 @@ const Minovedad = () => {
 
     useEffect(() =>{
         getheNovedades(localStorage.getItem('token')).then(res => {
-            setNovedades(res.data)
+          const sortedNovedades = res.data.sort((a, b) => {
+            const dateA = new Date(a.idTurno.fecha);
+            const dateB = new Date(b.idTurno.fecha);
+            return dateB - dateA;
+          });
+          setNovedades(sortedNovedades);
         })
-    }, [])
-
+      }, [])
     
     return (
         <> 
