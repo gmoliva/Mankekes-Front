@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Heading,  FormControl, FormLabel, Input, Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, ModalCloseButton, Select, Stack, Box, FormErrorMessage, ChakraProvider } from '@chakra-ui/react'
+import { Container, Heading,  FormControl, FormLabel, Input, Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, ModalCloseButton, Select, Stack, FormErrorMessage } from '@chakra-ui/react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 
@@ -10,14 +10,14 @@ const NuevoTurno = () => {
     const [horaEntrada, setHoraEntrada] = useState('')
     const [horaSalida, setHoraSalida] = useState('')
     const [usuarios, setUsuarios] = useState([])
-
+    const [errorMessage, setErrorMessage] = useState('')
     const [isOpen, setIsOpen] = useState(false)
 
     const handleClose = () => setIsOpen(false)
 
     const obtenerUsuarios = async () => {
         try{
-            const resultado = await axios.get(`${process.env.SERVIDOR}/api/Usuario`)
+            const resultado = await axios.get(`${process.env.SERVIDOR}/Usuario`)
             setUsuarios(resultado.data)
         }catch(error){
             console.error(error)
@@ -30,8 +30,10 @@ const NuevoTurno = () => {
 
 
 const guardarTurno = async () => {
-    try {
-            await axios.post(`${process.env.SERVIDOR}/api/Turno`, {
+    if(validarHorario(tipo, horaEntrada) && validarHorarioSalida(tipo, horaEntrada, horaSalida) && validarHorariosDistintos(horaEntrada, horaSalida)){
+
+        try {
+            await axios.post(`${process.env.SERVIDOR}/Turno`, {
                 fecha: fecha,
                 tipo: tipo,
                 idUsuario: idUsuario,
@@ -39,15 +41,20 @@ const guardarTurno = async () => {
                 horaSalida: horaSalida,
             })
             setIsOpen(true)
-            } catch (error) {
+        } catch (error) {
             console.error(error)
         }
+    }else {
+        setErrorMessage('Verifique los campos ingresados')
     }
+}
 
 const handleSubmit = (event) => {
     event.preventDefault()
     guardarTurno()
+
 }
+
 
 const router = useRouter()
 
@@ -58,6 +65,26 @@ const handleAccept = () => {
 
 const handleCancel = () =>{
     router.push('../turnos/administracionTurnos')
+}
+
+const validarHorario = (tipo, hora) => {
+    if(tipo === '0'){
+        return hora <= '12:00';
+    }else if(tipo === '1'){
+        return hora >= '12:00';
+    }
+    return true
+}
+
+const validarHorarioSalida = (tipo, horaEntrada, horaSalida) => {
+    if(tipo === '0'){
+        return horaSalida > horaEntrada;
+    }
+    return true;
+}
+
+const validarHorariosDistintos = (horaEntrada, horaSalida) => {
+    return horaEntrada!== horaSalida;
 }
 
 return(
@@ -85,13 +112,17 @@ return(
                 ))}
             </Select>
         </FormControl>
-        <FormControl>
+        <FormControl isInvalid={!validarHorario(tipo, horaEntrada) || !validarHorariosDistintos(horaEntrada, horaSalida)}>
             <FormLabel>Horario de Entrada</FormLabel>
-            <Input type="time" value={horaEntrada} onChange={(event) => setHoraEntrada(event.target.value)} />
+            <Input type="time" value={horaEntrada} onChange={(event) => setHoraEntrada(event.target.value)} onBlur={() => setHoraEntrada(horaEntrada)} />
+            {!validarHorario(tipo, horaEntrada) && <FormErrorMessage>El horario de entrada es invalido para el tipo de turno seleccionado</FormErrorMessage>}
+            {!validarHorariosDistintos(horaEntrada, horaSalida) && <FormErrorMessage>El horario de entrada debe ser mayor al horario de salida para el tipo de turno seleccionado</FormErrorMessage>}
         </FormControl>
-        <FormControl>
+        <FormControl isInvalid={!validarHorarioSalida(tipo, horaEntrada, horaSalida) || !validarHorariosDistintos(horaEntrada, horaSalida)}>
             <FormLabel>Horario de Salida</FormLabel>
-            <Input type="time" value={horaSalida} onChange={(event) => setHoraSalida(event.target.value)} />
+            <Input type="time" value={horaSalida} onChange={(event) => setHoraSalida(event.target.value)} onBlur={() => setHoraSalida(horaSalida)} />
+            {!validarHorariosDistintos(horaEntrada, horaSalida) && <FormErrorMessage>El horario de salida no puede ser igual al horario de entrada</FormErrorMessage>}
+            {!validarHorarioSalida(tipo, horaEntrada, horaSalida) && <FormErrorMessage>El horario de salida debe ser mayor al horario de entrada para el tipo de turno seleccionado</FormErrorMessage>}
         </FormControl>
         <Button type="submit" mr={4} colorScheme="teal">Guardar Turno</Button>
         <Button onClick={handleCancel} colorScheme="red">Cancelar</Button>
@@ -107,6 +138,16 @@ return(
                     <Button mr={3} onClick={handleAccept}>
                         Aceptar
                     </Button>
+                </ModalFooter>
+            </ModalContent>
+        </Modal>
+        <Modal isOpen={errorMessage !== ''} onClose={() => setErrorMessage('')}>
+            <ModalOverlay />
+            <ModalContent>
+                <ModalHeader>Error</ModalHeader>
+                <ModalBody>{errorMessage}</ModalBody>
+                <ModalFooter>
+                    <Button onClick={() => setErrorMessage('')}>Aceptar</Button>
                 </ModalFooter>
             </ModalContent>
         </Modal>
