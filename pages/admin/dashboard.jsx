@@ -8,13 +8,14 @@ const AdminDashboard = () => {
     const router = useRouter()
 
     const [conserjes, setConserjes] = useState([{
-        nombre: '',
-        tipo: ''
+        dia: '',
+        noche: ''
     }])
 
     useEffect(() => {
         getTurnosCurrentDate().then(res => {
             setConserjes(res.data)
+            
         })
     }, [])
 
@@ -63,9 +64,9 @@ const AdminDashboard = () => {
                 </CardHeader>
                 <CardBody>
                     <Heading size='sm'>Dia</Heading>
-                    <Text marginBottom={'10%'}>{ conserjes[0]?.nombre? conserjes[0].nombre : "No hay conserje asignado para este dia."}</Text>
+                    <Text marginBottom={'10%'}>{ conserjes.dia!=""? conserjes.dia : "No hay conserje asignado para este dia."}</Text>
                     <Heading size='sm'>Noche</Heading>
-                    <Text marginBottom={'10%'}>{ conserjes[1]?.nombre? conserjes[1].nombre : "No hay conserje asignado para esta noche."}</Text>
+                    <Text marginBottom={'10%'}>{ conserjes.noche!=""? conserjes.noche : "No hay conserje asignado para esta noche."}</Text>
                 </CardBody>
                 <CardFooter>
                 </CardFooter>
