@@ -70,11 +70,9 @@ const Editar = ({ data }) => {
         const v = validar();
 
         if (v === false){
-            //alert("Por favor ingresar de manera correcta los");
-            console.log("mal")
+
         }else if (v === true){
-            //e.preventDefault()
-            console.log("bien")
+
 
             let timerInterval
         updateUsuario(usuarios,usuario).then(res => {

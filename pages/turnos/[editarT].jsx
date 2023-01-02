@@ -1,7 +1,7 @@
 import React, { useState,  useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { ChakraProvider, Box, Container, Heading, FormControl, FormLabel, Input, FormErrorMessage, Select, Button, Modal, ModalBody, ModalFooter, ModalHeader, ModalOverlay, ModalContent, ModalCloseButton, Stack } from '@chakra-ui/react'
+import { Container, Heading, FormControl, FormLabel, Input, FormErrorMessage, Select, Button, Modal, ModalBody, ModalFooter, ModalHeader, ModalOverlay, ModalContent, ModalCloseButton, Stack } from '@chakra-ui/react'
 import moment from "moment";
 
 export const getServerSideProps = async (context) => {

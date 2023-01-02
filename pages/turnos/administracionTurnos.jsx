@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { ChakraProvider, Box, Table, TableCaption, Thread, Tr, Th, Td, HStack, Button, Container, Heading, Stack, Thead, Tbody, Modal, ModalBody, ModalFooter, ModalHeader, ModalOverlay, ModalContent, ModalCloseButton} from '@chakra-ui/react'
+import { Table, Tr, Td, HStack, Button, Container, Heading, Stack, Thead, Tbody, Modal, ModalBody, ModalFooter, ModalHeader, ModalOverlay, ModalContent, ModalCloseButton} from '@chakra-ui/react'
 import { getTurnos } from '../../data/turnos'
 import { useRouter } from 'next/router'
 import axios from 'axios'

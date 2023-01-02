@@ -10,8 +10,7 @@ useDisclosure,
 Container,
 useMediaQuery,
 } from "@chakra-ui/react";
-import { useEffect } from "react";
-import { FaClipboardCheck, FaRss } from "react-icons/fa";
+import { FaClipboardCheck } from "react-icons/fa";
 import { HiCollection } from "react-icons/hi";
 import { MdHome, MdLogout, MdCalendarToday, MdPeople } from "react-icons/md";
 import React from "react";

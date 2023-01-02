@@ -1,10 +1,7 @@
-import { Button,ButtonGroup, Container, Heading, Input, Stack, Table, Tbody,Tr, Td, Thead, HStack } from '@chakra-ui/react'
+import { Button,ButtonGroup, Container, Heading, Stack, Table, Tbody,Tr, Td, Thead } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
 import { getOnlyNovedades } from '../../data/novedades'
-import Swal from 'sweetalert2'
-
 
 const Novedad = () => {
     const [novedad, setNovedades] = useState([{

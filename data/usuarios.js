@@ -1,5 +1,4 @@
 import axios from 'axios';
-//import { get } from 'mongoose';
 
 const login =  (rut) => {
     const response =  axios.post(`${process.env.SERVIDOR}/usuario/usr/login/`, { rut });

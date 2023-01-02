@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import { Button, Container, Heading, Stack, Select, FormControl, FormLabel } from '@chakra-ui/react'
+import { Button, Container, Heading, Stack, FormControl, FormLabel } from '@chakra-ui/react'
 import TextareaInput from '../../../components/TextareaInput'
 import  InputForm  from '../../../components/InputForm'
 import { createNovedad } from '../../../data/novedades'
 import Router from 'next/router'
 import { useRouter } from 'next/router'
-import {useEffect} from 'react';
+
 import Swal from 'sweetalert2'
 
 

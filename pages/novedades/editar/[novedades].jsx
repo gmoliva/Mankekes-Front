@@ -54,7 +54,7 @@ const Editar = ({ dat }) => {
 
     
     const handleClick = async event => {
-        console.log(router.query)
+        //console.log(router.query)
         await delay(1300);
         Router.push (`../mostrar/${novedad.idTurno}`)
       };

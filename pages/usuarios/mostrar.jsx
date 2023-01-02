@@ -20,8 +20,8 @@ const Mostrar = () => {
     const delUser = async (id) => {
         //e.preventDefault()
         const response = await deleteUsuario(id,1)
-        if (response.status === 200)
-        console.log("Eliminado")
+        //if (response.status === 200)
+        //console.log("Eliminado")
     }
 
     const confirmDelete = async (id) => {

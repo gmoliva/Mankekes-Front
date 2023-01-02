@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import { Button, Container, Heading, HStack, Input, Stack, Table, Thead, Tr, Td, Th, Tbody } from '@chakra-ui/react'
-import { getTurnos, getTurnosFrom } from '../../data/turnos'
+import { Button, Container, Heading, HStack, Stack, Table, Thead, Tr, Td, Tbody } from '@chakra-ui/react'
+import { getTurnosFrom } from '../../data/turnos'
 import { useRouter } from 'next/router'
 
 const Turnos = () => {
