@@ -20,7 +20,6 @@ const Novedad = () => {
     
     const delNovedad = async (id) =>{
         const response = await deleteNovedad(id)
-        
     }
 
     const confirmDelete = async (id) => {
