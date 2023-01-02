@@ -16,6 +16,17 @@ const NuevoTurno = () => {
 
     const handleClose = () => setIsOpen(false)
 
+    const validarFecha = () => {
+        const fechaActual = new Date(Date.now());
+        const fechaIngresada = new Date(fecha);
+        
+        if (fechaIngresada < fechaActual) {
+            setErrorMessage('la fehca ingresada no puede ser anterior a la fecha actual');
+            return false;
+        }
+        return true;
+    }
+
     const obtenerUsuarios = async () => {
         try{
 
@@ -33,7 +44,7 @@ const NuevoTurno = () => {
 
 
 const guardarTurno = async () => {
-    if(validarHorario(tipo, horaEntrada) && validarHorarioSalida(tipo, horaEntrada, horaSalida) && validarHorariosDistintos(horaEntrada, horaSalida)){
+    if(validarFecha() && validarHorario(tipo, horaEntrada) && validarHorarioSalida(tipo, horaEntrada, horaSalida) && validarHorariosDistintos(horaEntrada, horaSalida)){
 
         try {
             let response = await axios.post(`${process.env.SERVIDOR}/Turno`, {
