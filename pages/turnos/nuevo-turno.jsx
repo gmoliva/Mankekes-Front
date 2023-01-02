@@ -107,8 +107,8 @@ return(
             </Select>
         </FormControl>
         <FormControl>
-            <FormLabel>Usuario</FormLabel>
-            <Select value={idUsuario} placeholder="Seleccione un Usuario" onChange={(event) => setIdUsuario(event.target.value)}>
+            <FormLabel>Conserje</FormLabel>
+            <Select value={idUsuario} placeholder="Seleccione un Conserje" onChange={(event) => setIdUsuario(event.target.value)}>
                 {usuarios.map((usuario) =>(
                     <option key={usuario._id} value={usuario._id}>{usuario.nombre}</option>
                 ))}

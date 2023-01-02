@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Table, Tr, Td, HStack, Button, Container, Heading, Stack, Thead, Tbody, Modal, ModalBody, ModalFooter, ModalHeader, ModalOverlay, ModalContent, ModalCloseButton} from '@chakra-ui/react'
+import { ChakraProvider, Box, Table, TableCaption, Thread, Tr, Th, Td, HStack, Button, Container, Heading, Stack, Thead, Tbody, Modal, ModalBody, ModalFooter, ModalHeader, ModalOverlay, ModalContent, ModalCloseButton} from '@chakra-ui/react'
 import { getTurnos } from '../../data/turnos'
 import { useRouter } from 'next/router'
 import axios from 'axios'
@@ -33,8 +33,8 @@ const contentTable = () => {
         <Tr key={index}>
             <Td>{turno.fecha.substring(0,10)}</Td>
             <Td>{turno.tipo.toString().replace("0","Dia").replace("1","Noche")}</Td>
-            <Td>{entrada.toLocaleString().substring(11,20)}</Td>
-            <Td>{salida.toLocaleString().substring(11,20)}</Td>
+            <Td>{entrada.toTimeString().substring(0,5)}</Td>
+            <Td>{salida.toTimeString().substring(0,5)}</Td>
             <Td>{turno.idUsuario?.nombre}</Td>
             <Td>
             <HStack>

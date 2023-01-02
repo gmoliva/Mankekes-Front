@@ -133,7 +133,7 @@ const EditarTurno = ({ data }) => {
                     <FormErrorMessage>{error}</FormErrorMessage>
                     </FormControl>
                     <FormControl isInvalid={!!error}>
-                        <FormLabel htmlFor="idUsuario">Usuario</FormLabel>
+                        <FormLabel htmlFor="idUsuario">Conserje</FormLabel>
                         <Select
                             name="idUsuario"
                             id="idUsuario"
