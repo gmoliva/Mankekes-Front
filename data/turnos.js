@@ -27,10 +27,17 @@ const getTurnosFrom = async () => {
 
 }
 
+const getTurnosCurrentDate = async () => {
+    const response = await axios.get(`${process.env.SERVIDOR}/Turno/getConserjes/currentDate`)
+    return response
+
+}
+
 module.exports = {
     getTurnos,
     getTurno,
     updateTurno,
     getUsuario,
-    getTurnosFrom
+    getTurnosFrom,
+    getTurnosCurrentDate
 }

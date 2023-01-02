@@ -45,10 +45,10 @@ const Index = () => {
 	return (
 		<>
 			<Container maxW="container.xl" centerContent>
-				<Heading as="h1" size="2xl" textAlign="center" mt="10">Que usuario ingresara</Heading>
+				<Heading as="h1" size="2xl" textAlign="center" mt="10" marginBottom={'3%'}>Ingrese su RUT</Heading>
 				<Stack my={5}>
 					<FormControl>
-						<FormLabel>Rut del usuario</FormLabel>
+						<FormLabel></FormLabel>
 						<Input onChange={handleChange} />
 					</FormControl>
 					<Button onClick={onSubmit} >Ingresar</Button>

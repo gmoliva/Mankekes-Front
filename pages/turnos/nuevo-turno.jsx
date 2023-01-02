@@ -21,7 +21,7 @@ const NuevoTurno = () => {
         const fechaIngresada = new Date(fecha);
         
         if (fechaIngresada < fechaActual) {
-            setErrorMessage('la fehca ingresada no puede ser anterior a la fecha actual');
+            setErrorMessage('la fecha ingresada no puede ser anterior a la fecha actual');
             return false;
         }
         return true;
@@ -61,7 +61,7 @@ const guardarTurno = async () => {
                     showConfirmButton: true,
                     text: response.data.msg
                 }).then(() => {
-                    console.log("aweonao")
+                    
                 })
             }
 

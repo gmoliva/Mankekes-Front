@@ -40,7 +40,7 @@ const Novedad = () => {
                     showConfirmButton: true
                 }).then((result) =>{
                     if (result.isConfirmed)
-                    router.push('../../turnos/conserjeriaTurnos')})
+                    router.push(`/turnos/conserjeriaTurnos`)})
             }
         }
         )

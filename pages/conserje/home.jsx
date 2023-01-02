@@ -19,7 +19,7 @@ const ConserjeDb = () => {
                 <Text>Visualización de turnos que se le han asignado.</Text>
                 </CardBody>
                 <CardFooter>
-                <Button onClick={() => router.push('../turnos/conserjeriaTurnos')}>Ver aquí</Button>
+                <Button onClick={() => router.push('/turnos/conserjeriaTurnos')}>Ver aquí</Button>
                 </CardFooter>
             </Card>
             <Card>
@@ -30,7 +30,7 @@ const ConserjeDb = () => {
                 <Text>Visualización de novedades creadas por mí.</Text>
                 </CardBody>
                 <CardFooter>
-                <Button onClick={() => router.push('../turnos/conserjeriaTurnos')}>Ver aquí</Button>
+                <Button onClick={() => router.push('/novedades/misnovedades')}>Ver aquí</Button>
                 </CardFooter>
             </Card>
             <Card>
