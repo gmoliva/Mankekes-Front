@@ -38,13 +38,14 @@ const ConserjeDb = () => {
                 <Heading size='md'>Mi Perfil</Heading>
                 </CardHeader>
                 <CardBody>
-                <Text>Ver y modificar perfil del usuario actual.</Text>
+                <Text>Ver el perfil del usuario actual.</Text>
                 </CardBody>
                 <CardFooter>
                 <Button onClick={()=> router.push(`/usuarios/perfil/${localStorage.getItem('token')}`)}>Ver aquí</Button>
                 </CardFooter>
             </Card>
             </SimpleGrid>
+
 
         </Container>
             </Box>
