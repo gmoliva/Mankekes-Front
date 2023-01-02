@@ -80,7 +80,7 @@ const Novedad = () => {
         <> 
             <Container maxW="container.xl">
                 <Heading as="h1" size="2xl" textAlign="center" mt="10">Novedades de turno</Heading>
-                <ButtonGroup variant='outline' spacing='1000'>
+                <ButtonGroup variant='outline' spacing={10}>
                 <Button onClick={()=> router.push(`../../turnos/conserjeriaTurnos`)}>Atras</Button>
                 <Button colorScheme='green' onClick={()=> router.push(`../crear/${rt.query.idturno}`)}>Agregar novedades</Button>
                 </ButtonGroup>
