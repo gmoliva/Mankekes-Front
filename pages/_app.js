@@ -9,22 +9,30 @@ function MyApp({Component, pageProps}) {
 	//console.log(router.pathname)
 
 	if(router.pathname === '/')
-  	return ( 
-		<ChakraProvider> 
-			<Component {...pageProps} />
-		</ChakraProvider>
-	)
-	else if(typeof window !== 'undefined')
-	return ( 
-		<ChakraProvider> 
-			<HStack marginLeft={{base: 0, md: '60'}}>
+		return ( 
+			<ChakraProvider> 
 				<Component {...pageProps} />
-        	<Sidebar></Sidebar>
-			</HStack>
-		</ChakraProvider>
+			</ChakraProvider>
+		)
+	else if(typeof window !== 'undefined'){
+
+		if(!localStorage.getItem("token")){
+			router.push('/')
+			return
+		}
+
+
+		if(router.pathname !== '/')
+			return ( 
+				<ChakraProvider> 
+					<HStack marginLeft={{base: 0, md: '60'}}>
+						<Component {...pageProps} />
+						<Sidebar></Sidebar>
+					</HStack>
+				</ChakraProvider>
 	)
-
-
+	}
+	
 }
 
 export default MyApp
