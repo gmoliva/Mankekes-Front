@@ -31,7 +31,7 @@ const Minovedad = () => {
     }
 
     useEffect(() =>{
-        getheNovedades().then(res => {
+        getheNovedades(localStorage.getItem('token')).then(res => {
             setNovedades(res.data)
         })
     }, [])

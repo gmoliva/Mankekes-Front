@@ -90,7 +90,7 @@ bg="brand.600" borderColor="blackAlpha.300" borderRightWidth="1px" w="60" {...pr
 <Flex direction="column" as="nav" fontSize="sm" color="gray.600" aria-label="Main Navigation">
     <NavItem icon={MdHome} onClick={() => router.push('/conserje/home') }>Home</NavItem>
     <NavItem icon={MdCalendarToday} onClick={() => router.push('/turnos/conserjeriaTurnos')}>Mis Turnos</NavItem>
-    <NavItem icon={HiCollection}>Mis Novedades</NavItem>
+    <NavItem icon={HiCollection} onClick={() => router.push('/novedades/misnovedades')}>Mis Novedades</NavItem>
     <NavItem icon={FaClipboardCheck} onClick={()=> router.push(`/usuarios/perfil/${localStorage.getItem('token')}`)}>Perfil</NavItem>
     <NavItem icon={MdLogout} onClick={logout}>Logout</NavItem>
 </Flex>
