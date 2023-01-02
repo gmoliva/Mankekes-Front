@@ -1,12 +1,10 @@
-import { Button,ButtonGroup, Container, Heading, Input, Stack, Table, Tbody,Tr, Td, Thead, HStack } from '@chakra-ui/react'
+import { Button,ButtonGroup, Container, Heading, Stack, Table, Tbody,Tr, Td, Thead} from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-import { getOnlyNovedades } from '../../data/novedades'
-import Swal from 'sweetalert2'
+import { getheNovedades } from '../../data/novedades'
 
 
-const Novedad = () => {
+const Minovedad = () => {
     const [novedad, setNovedades] = useState([{
         id: '',
         tipo: '',
@@ -27,26 +25,23 @@ const Novedad = () => {
                     <Td>{novedad.descripcion}</Td>
                     <Td>{novedad.idTurno?.fecha?.substring(0,10)}</Td>
                     <Td>{novedad.idTurno?.tipo?.toString().replace("0","Dia").replace("1","Noche")}</Td>
-                    <Td>{novedad.idUsuario?.nombre}</Td>
                 </Tr>
             )
         })
     }
 
     useEffect(() =>{
-        getOnlyNovedades().then(res => {
+        getheNovedades(localStorage.getItem('token')).then(res => {
             setNovedades(res.data)
         })
     }, [])
 
     
-  // se cambia el push de router  para que se mantenga en  el panel de administrador
     return (
         <> 
             <Container maxW="container.xl">
-                <Heading as="h1" size="2xl" textAlign="center" mt="10">Novedades de turno</Heading>
+                <Heading as="h1" size="2xl" textAlign="center" mt="10">Mis novedades</Heading>
                 <ButtonGroup variant='outline' spacing='1000'>
-                <Button onClick={()=> router.push('../admin/dashboard')}>Atras</Button>
                 </ButtonGroup>
                         
                 <Stack spacing={4} mt="10">
@@ -58,7 +53,6 @@ const Novedad = () => {
 								 <Td>Descripcion de la novedad</Td>
                                  <Td>Fecha de turno</Td>
                                  <Td>Tipo de turno</Td>
-                                 <Td>Nombre del conserje</Td>
                             </Tr>
                         </Thead>
                         <Tbody>
@@ -71,4 +65,4 @@ const Novedad = () => {
     )
 }
 
-export default Novedad
+export default Minovedad

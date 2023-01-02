@@ -17,7 +17,9 @@ const NuevoTurno = () => {
 
     const obtenerUsuarios = async () => {
         try{
-            const resultado = await axios.get(`${process.env.SERVIDOR}/Usuario`)
+
+            const resultado = await axios.get(`${process.env.SERVIDOR}/Usuario/conserje`)
+
             setUsuarios(resultado.data)
         }catch(error){
             console.error(error)

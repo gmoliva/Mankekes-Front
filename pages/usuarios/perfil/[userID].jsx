@@ -1,12 +1,11 @@
 import {useState} from 'react'
 import {useRouter} from 'next/router'
-import InputForm from '../../../components/InputForm'
 import Swal from 'sweetalert2'
-import { Button, Container, Heading,Stack,Select, FormControl} from '@chakra-ui/react'
+import { Button, Box, Container, Heading,Stack, Card, CardHeader, CardBody, CardFooter, Text} from '@chakra-ui/react'
 import { getUsuario,updateUsuario} from '../../../data/usuarios'
 
 export const getServerSideProps = async (context) => {
-    const response = await getUsuario(context.query.usuarios)
+    const response = await getUsuario(context.query.userID)
     return {
         props: {
             data: response.data
@@ -18,7 +17,7 @@ const Editar = ({ data }) => {
 
     const [usuario, setUsuario] = useState(data)
     const router = useRouter()
-    const { usuarios } = router.query
+    const { userID } = router.query
 
     function validar(){
 
@@ -35,7 +34,6 @@ const Editar = ({ data }) => {
         const expresionNombre = /^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/;
         const expresionDomicilio =/[a-zA-Z]+\s[A-Za-z0-9]+/;
         const expresionEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
-        const expresionTelefono = /^\d{8}$/;
 
         if(rut === "" || nombre === "" || domicilio === "" || email === "" || numero === "" || tipoUsuario === "" || estadoUsuario === ""){
             return false;
@@ -47,9 +45,6 @@ const Editar = ({ data }) => {
             return false;
         }else if(!expresionDomicilio.test(domicilio)){
             alert("El domicilio no valido")
-            return false;
-        }else if(!expresionTelefono.test(numero)){
-            alert("El número de teléfono no valido (maximos 8 números)")
             return false;
         }
         return true; 
@@ -77,7 +72,7 @@ const Editar = ({ data }) => {
             console.log("bien")
 
             let timerInterval
-        updateUsuario(usuarios,usuario).then(res => {
+        updateUsuario(userID,usuario).then(res => {
             if (res.status == 200){
                 Swal.fire({
                     title:'Usuario actualizado correctamente',
@@ -105,34 +100,67 @@ const Editar = ({ data }) => {
         resolve => setTimeout(resolve, ms)
     );
     
-        return(   
-            <Container maxW="container.xl" mt={10}>
-            <Heading as={"h1"} size={"2xl"} textAlign={"center"}>Modificar Usuario: {data.nombre}</Heading>
-            <Stack spacing={4} mt={10}>
-                <InputForm label="Rut" handleChange={handleChange} name="rut" placeholder="Actualizar rut" type="text" value={usuario.rut}/>
-                <InputForm label="Nombre" handleChange={handleChange} name="nombre" placeholder="Actualizar nombre" type="text" value={usuario.nombre}/>
-                <InputForm label="Domicilio" handleChange={handleChange} name="domicilio" placeholder="Actualizar domicilio" type="text" value={usuario.domicilio}/>
-                <InputForm label="Email" handleChange={handleChange} name="email" placeholder="Actualizar email" type="text" value={usuario.email}/> 
-                <InputForm label="Numero" handleChange={handleChange} name="numero" placeholder="Actualizar numero" type="tel" maxLength="8" value={usuario.numero}/> 
-                
-                <FormControl id="tipoUsuario">
-                    <h1>Tipo de usuario</h1>
-                    <Select name={"tipoUsuario"} onChange = {handleChange} placeholder='Seleccione el tipo de usuario' value={usuario.tipoUsuario}>
-                        <option name={"tipoUsuario"} onChange = {handleChange} value='0'>Administrador</option>
-                        <option name={"tipoUsuario"} onChange = {handleChange} value='1'>Conserje</option>
-                    </Select>
-                </FormControl> 
+        
+    return(   
+        <Container maxW="container.xl" mt={10}>
+            <Card>
+                <CardHeader>
+                    <Heading size='lg'>Mi Perfil</Heading>
+                </CardHeader>
 
-                <FormControl id="estadoUsuario"> 
-                    <h1>Estado del usuario</h1>
-                    <Select name={"estadoUsuario"} onChange = {handleChange} placeholder='Seleccione el tipo de usuario' value={usuario.estadoUsuario}>
-                        <option name={"estadoUsuario"} onChange = {handleChange} value='0'>Empleado</option>
-                        <option name={"estadoUsuario"} onChange = {handleChange} value='1'>Desvinculado de la empresa</option>
-                    </Select>
-                </FormControl> 
-                </Stack>
-                <Button colorScheme="green" mt={10} mb={10} onClick={submitUsuario}>Modificar Usuario</Button>
-                <Button colorScheme="red" mt={10} mb={10} onClick={() => router.push('../mostrar')}>Cancelar</Button>
+                <CardBody>
+                    <Stack spacing='4'>
+
+                    <Box>
+                        <Heading size='sm' textTransform='uppercase'>
+                        RUT
+                        </Heading>
+                        <Text pt='2' fontSize='md' marginBottom={'1%'}>
+                        {usuario.rut}
+                        </Text>
+                    </Box>
+
+                    <Box>
+                        <Heading size='sm' textTransform='uppercase'>
+                        Nombre
+                        </Heading>
+                        <Text pt='2' fontSize='md' marginBottom={'1%'}>
+                            {usuario.nombre}
+                        </Text>
+                    </Box>
+
+                    <Box>
+                        <Heading size='sm' textTransform='uppercase'>
+                        Domicilio
+                        </Heading>
+                        <Text pt='2' fontSize='md' marginBottom={'1%'}>
+                            {usuario.domicilio}
+                        </Text>
+                        
+                    </Box>
+
+                    <Box>
+                        <Heading size='sm' textTransform='uppercase'>
+                        Email
+                        </Heading>
+                        <Text pt='2' fontSize='md' marginBottom={'1%'}>
+                            {usuario.email}
+                        </Text>
+                    </Box>
+
+                    <Box>
+                        <Heading size='sm' textTransform='uppercase'>
+                        Numero
+                        </Heading>
+                        <Text pt='2' fontSize='md' marginBottom={'1%'}>
+                            {usuario.numero}
+                        </Text>
+                    </Box>
+                    
+                    </Stack>
+                </CardBody>
+            </Card>
+                
         </Container>
 )
 }

@@ -4,9 +4,7 @@ import TextareaInput from '../../../components/TextareaInput'
 import  InputForm  from '../../../components/InputForm'
 import { enviarJustificacion } from '../../../data/novedades'
 import Router from 'next/router'
-//import { useRouter } from 'next/router'
-import {useEffect} from 'react';
-import axios from 'axios'
+import {useEffect} from 'react'
 import Swal from 'sweetalert2'
 
 
@@ -20,21 +18,7 @@ const Justificar = () => {
         idUsuario: ''
     })
 
-    const [usuarios, setUsuario] = useState ([])
-
-    const obtenerUsuarios  = async () => {
-        try{
-            const resultado = await axios.get('http://localhost:5000/api/Usuario')
-            setUsuario(resultado.data)
-        }catch(error){
-            console.log(error)
-        }
-
-    }
-
-    useEffect (() =>{
-        obtenerUsuarios()
-    }, [])
+    
 
     const handleChange = (e) => {
             setNovedades({
@@ -92,7 +76,6 @@ const Justificar = () => {
         await delay(1000);
         Router.push (`/turnos/conserjeriaTurnos`)
         await delay(100);
-        //Router.reload()
       };
 
     const delay = ms => new Promise(

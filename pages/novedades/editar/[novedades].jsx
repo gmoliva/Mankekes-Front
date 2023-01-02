@@ -3,7 +3,6 @@ import { getNovedad,updateNovedad} from '../../../data/novedades'
 import { Button, Container, Heading, Stack } from '@chakra-ui/react'
 import {useRouter} from 'next/router'
 import Router from 'next/router'
-//import InputForm from '../../components/InputForm'
 import TextareaInput from '../../../components/TextareaInput'
 import Swal from 'sweetalert2'
 
@@ -29,7 +28,6 @@ const Editar = ({ dat }) => {
                 [e.target.name]: e.target.value
             })
     }
-    //console.log(novedad)
     const submitNovedades =(e) => {
         e.preventDefault()
         let timerInterval
@@ -59,8 +57,6 @@ const Editar = ({ dat }) => {
         console.log(router.query)
         await delay(1300);
         Router.push (`../mostrar/${novedad.idTurno}`)
-        //await delay(1);
-        //Router.reload()
       };
       
       const delay = ms => new Promise(

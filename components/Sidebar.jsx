@@ -1,6 +1,5 @@
 import {
 Box,
-Button,
 Drawer,
 DrawerContent,
 DrawerOverlay,
@@ -9,16 +8,11 @@ Icon,
 Text,
 useDisclosure,
 Container,
-HStack,
 useMediaQuery,
-useColorMode,
-useColorModeValue
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { FaClipboardCheck, FaRss } from "react-icons/fa";
-import { AiFillGift } from "react-icons/ai";
-import { BsGearFill } from "react-icons/bs";
-import { HiCode, HiCollection } from "react-icons/hi";
+import { HiCollection } from "react-icons/hi";
 import { MdHome, MdLogout, MdCalendarToday, MdPeople } from "react-icons/md";
 import React from "react";
 import { useRouter } from "next/router";
@@ -72,11 +66,11 @@ return(
         </Text>
     </Flex>
     <Flex direction="column" as="nav" fontSize="sm" color="gray.600" aria-label="Main Navigation">
-        <NavItem icon={MdHome} onClick={() => router.push('../admin/dashboard') }>Home</NavItem>
-        <NavItem icon={MdCalendarToday} onClick={() => router.push('../turnos/administracionTurnos')}>Turnos</NavItem>
-        <NavItem icon={HiCollection} onClick={() => router.push('../novedades/novedad')}>Novedades</NavItem>
-        <NavItem icon={MdPeople} onClick={()=> router.push('../usuarios/mostrar')}>Empleados</NavItem>
-        <NavItem icon={FaClipboardCheck}>Perfil</NavItem>
+        <NavItem icon={MdHome} onClick={() => router.push('/admin/dashboard') }>Home</NavItem>
+        <NavItem icon={MdCalendarToday} onClick={() => router.push('/turnos/administracionTurnos')}>Turnos</NavItem>
+        <NavItem icon={HiCollection} onClick={() => router.push('/novedades/novedad')}>Novedades</NavItem>
+        <NavItem icon={MdPeople} onClick={()=> router.push('/usuarios/mostrar')}>Empleados</NavItem>
+        <NavItem icon={FaClipboardCheck} onClick={()=> router.push(`/usuarios/perfil/${localStorage.getItem('token')}`)}>Perfil</NavItem>
         <NavItem icon={MdLogout} onClick={logout}>Logout</NavItem>
     </Flex>
 </Box>
@@ -96,8 +90,8 @@ bg="brand.600" borderColor="blackAlpha.300" borderRightWidth="1px" w="60" {...pr
 <Flex direction="column" as="nav" fontSize="sm" color="gray.600" aria-label="Main Navigation">
     <NavItem icon={MdHome} onClick={() => router.push('/conserje/home') }>Home</NavItem>
     <NavItem icon={MdCalendarToday} onClick={() => router.push('/turnos/conserjeriaTurnos')}>Mis Turnos</NavItem>
-    <NavItem icon={HiCollection}>Mis Novedades</NavItem>
-    <NavItem icon={FaClipboardCheck}>Perfil</NavItem>
+    <NavItem icon={HiCollection} onClick={() => router.push('/novedades/misnovedades')}>Mis Novedades</NavItem>
+    <NavItem icon={FaClipboardCheck} onClick={()=> router.push(`/usuarios/perfil/${localStorage.getItem('token')}`)}>Perfil</NavItem>
     <NavItem icon={MdLogout} onClick={logout}>Logout</NavItem>
 </Flex>
 </Box>

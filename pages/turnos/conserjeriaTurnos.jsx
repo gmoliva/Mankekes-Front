@@ -38,8 +38,8 @@ const Turnos = () => {
 
 
     return (
-        <>
-            <Container maxW="container.xl" marginLeft={{base: 0, md: '60'}}>
+        
+            <Container maxW="container.xl">
                 <Heading as="h1" size="2xl" textAlign="center" mt="10">Seleccione un turno</Heading>         
                 <Button  variant='outline' onClick={()=> router.push('../conserje/home')}>Atras</Button>                
                 <Stack spacing={4} mt="10">
@@ -57,7 +57,7 @@ const Turnos = () => {
                     </Table>
                 </Stack>
             </Container>
-        </>
+        
 
     )
 }
