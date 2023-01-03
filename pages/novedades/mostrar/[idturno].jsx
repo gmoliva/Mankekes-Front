@@ -1,4 +1,4 @@
-import { Button,ButtonGroup, Container, Heading, Input, Stack, Table, Tbody,Tr, Td, Thead, HStack } from '@chakra-ui/react'
+import { Button,ButtonGroup, Container, Heading, Input, Stack, Table, Tbody,Tr, Td, Thead, HStack, Flex, Spacer } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { getNovedadesFrom,deleteNovedad } from '../../../data/novedades'
@@ -80,11 +80,11 @@ const Novedad = () => {
         <> 
             <Container maxW="container.xl">
                 <Heading as="h1" size="2xl" textAlign="center" mt="10">Novedades de turno</Heading>
-                <ButtonGroup variant='outline' spacing={10}>
+                <Flex>
                 <Button onClick={()=> router.push(`../../turnos/conserjeriaTurnos`)}>Atras</Button>
+                <Spacer></Spacer>
                 <Button colorScheme='green' onClick={()=> router.push(`../crear/${rt.query.idturno}`)}>Agregar novedades</Button>
-                </ButtonGroup>
-                        
+                </Flex>  
                 <Stack spacing={4} mt="10">
                     <Table variant="simple">
                         <Thead>

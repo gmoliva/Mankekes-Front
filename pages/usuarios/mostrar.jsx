@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Button, Container, Heading, HStack, Stack, Table, Thead, Tr, Td, Tbody } from '@chakra-ui/react'
+import { Button, Container, Heading, HStack, Stack, Table, Thead, Tr, Td, Tbody, Flex, Box, Spacer } from '@chakra-ui/react'
 import { getUsuarios,deleteUsuario  } from '../../data/usuarios'
 import { useRouter } from 'next/router'
 import  Swal  from 'sweetalert2'
@@ -29,8 +29,8 @@ const Mostrar = () => {
             title: 'Esta seguro que quiere eliminar este usuario?',
             showDenyButton: true,
             //showCancelButton: true,
-            confirmButtonText: 'Sis',
-            denyButtonText: 'NoN',
+            confirmButtonText: 'Si',
+            denyButtonText: 'No',
             }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
 
@@ -106,9 +106,12 @@ const Mostrar = () => {
         <> 
             <Container maxW="container.xl">
                 <Heading as="h1" size="2xl" textAlign="center" mt="10">Seleccione un conserje</Heading>
-                <Button variant='outline' spacing='1000' onClick={()=> router.push('../admin/dashboard')}>Atras</Button>
-                <Button variant='outline' spacing='1000' onClick={()=> router.push('./crear')}>Crear Usuario</Button>
-                
+                <Flex>
+                <Button variant='outline'  onClick={()=> router.push('../admin/dashboard')}>Atras</Button>
+                <Spacer></Spacer>
+                <Button variant='outline' colorScheme='green'  onClick={()=> router.push('./crear')}>Crear Usuario</Button>
+                </Flex>
+
                 <Stack spacing={4} mt="10">
                     <Table variant="simple">     
                         <Thead>

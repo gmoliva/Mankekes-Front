@@ -102,7 +102,7 @@ const Usuarios = () => {
     return (
         <Container maxW="container.xl" mt={10}>
             <Heading as={"h1"} size={"2xl"} textAlign={"center"}>Crear Usuario</Heading>
-            <Button variant='outline' spacing='1000' onClick={()=> router.push('../admin/dashboard')}>Atras</Button>
+            <Button variant='outline' onClick={()=> router.push('../admin/dashboard')}>Atras</Button>
             <Stack spacing={4} mt={10}>
                 <FormControl id="rut" isRequired> 
                     <FormLabel>RUT</FormLabel>
