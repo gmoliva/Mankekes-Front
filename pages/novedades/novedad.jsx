@@ -1,4 +1,4 @@
-import { Button,ButtonGroup, Container, Heading, Stack, Table, Tbody,Tr, Td, Thead } from '@chakra-ui/react'
+import { Button,ButtonGroup, Container, Heading, Stack, Table, Tbody,Tr, Td, Thead, HStack } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { getOnlyNovedades } from '../../data/novedades'
@@ -30,20 +30,51 @@ const Novedad = () => {
         })
     }
 
-    useEffect(() =>{
+    useEffect(() => {
         getOnlyNovedades().then(res => {
-            setNovedades(res.data)
+            const sortedNovedad = res.data.sort(CompararDescendente);
+            setNovedades(sortedNovedad);
+            router.push('./novedad')
         })
     }, [])
 
+
+        const CompararAscendente = (a, b) => {
+         const dateA = new Date(a.idTurno?.fecha);
+         const dateB = new Date(b.idTurno?.fecha);
+            return dateA - dateB;
+         }
+
+        const CompararDescendente = (a, b) => {
+        const dateA = new Date(a.idTurno?.fecha);
+        const dateB = new Date(b.idTurno?.fecha);
+        return dateB - dateA;
+         }
     
-  // se cambia el push de router  para que se mantenga en  el panel de administrador
+          // Sort the novedad array in ascending order
+          const Ascendente = () => {
+            const sortedNovedad = novedad.sort(CompararAscendente);
+            setNovedades(sortedNovedad);
+            router.push('./novedad')
+            }
+
+            // Sort the novedad array in descending order
+            const Descendente = () => {
+            const sortedNovedad = novedad.sort(CompararDescendente);
+            setNovedades(sortedNovedad);
+            router.push('./novedad')
+            }
+    
     return (
         <> 
             <Container maxW="container.xl">
                 <Heading as="h1" size="2xl" textAlign="center" mt="10">Novedades de turno</Heading>
-                <ButtonGroup variant='outline' spacing='1000'>
+                <ButtonGroup variant='outline' spacing='10'>
                 <Button onClick={()=> router.push('../admin/dashboard')}>Atras</Button>
+                <HStack spacing={10} margin='10'>
+                <Button size='sm' colorScheme='red' onClick={Ascendente}>Ordenar fechas de menor a mayor</Button>
+                <Button size='sm' colorScheme='green' onClick={Descendente}>Ordenar fechas de mayor a menor</Button>
+                </HStack>
                 </ButtonGroup>
                         
                 <Stack spacing={4} mt="10">
