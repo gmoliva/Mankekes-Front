@@ -103,7 +103,7 @@ const handleAddTurno = () =>{
 return (
     <>
     <Container maxW="container.xl">
-        <Heading as="h1" size="2xl" textAlign="center" mt="10">Admnistración de Turnos</Heading>
+        <Heading as="h1" size="2xl" textAlign="center" mt="10">Administración de Turnos</Heading>
         <Button colorScheme="blue" mt="10" mb="10" onClick ={handleAddTurno}>Agregar Turno</Button>
         <Stack spacing={4} mt="10">
             <Table variant="simple">
